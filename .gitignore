@@ -16,3 +16,4 @@ payroll_system/frontend/models.py
 payroll_system/frontend/urls.py
 payroll_system/frontend/views.py
 payroll_system/frontend/node_modules/
+payroll_system/payroll_system
