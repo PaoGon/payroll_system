@@ -1,0 +1,96 @@
+.employee {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.employee > div {
+  margin-bottom: 5px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.data {
+  flex: 5;
+}
+
+.label {
+  flex: 0.5;
+}
+
+.head {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-family: "Varela Round", sans-serif;
+  font-size: 15px;
+}
+
+.lab {
+  text-align: center;
+}
+
+.idk {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.div-table {
+  display: table;
+  width: 100%;
+  color: #9c9c9c;
+  font-size: 1rem;
+  font-weight: bolder;
+  border-spacing: 5px;
+}
+
+.div-table-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  clear: both;
+}
+
+.div-table-col {
+  float: left;
+  text-align: center;
+  display: table-column;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.info {
+  margin-top: 20px;
+  color: black;
+  font-size: 18px;
+  border-radius: 20px;
+  height: max-content;
+  background-color: #f6f6f6;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 5rem;
+  color: #4977ad;
+}
+
+.ed {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: #4977ad;
+}
+.name {
+  max-width: max-content;
+}
+
+.con {
+  width: 100%;
+  height: 100%;
+}
