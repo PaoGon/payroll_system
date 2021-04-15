@@ -4,10 +4,15 @@ import {RiAddCircleFill} from 'react-icons/ri'
 import Popup from './Popup'
 import {PopupData} from './PopupData'
 import EmployeeContent from './EmployeeContent'
+import EmployeeSearch from './EmployeeSearch'
 
-export default function Employee() {
+export default function Employee(props) {
     const [click, setClick] = useState(false);
     const [trigger, setTrigger] = useState(false);
+
+    //decides who will be render in the data class of employee 
+    const [action, setAction] = useState(true)
+
     const [data, setData] = useState({
         name: "",
         surname: "",
@@ -72,7 +77,11 @@ export default function Employee() {
                     </Popup>
                 </div>
                 <div className="data">
-                    <EmployeeContent trigger={trigger} setTrigger={setTrigger}/>
+
+                    {/* this will be triger to render the search */}
+                    <div className="contSearh">
+                        <EmployeeContent trigger={trigger} setTrigger={setTrigger}/>
+                    </div>
                 </div>
             </div>
         </>     
