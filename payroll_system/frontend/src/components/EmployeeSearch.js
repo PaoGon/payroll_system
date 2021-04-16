@@ -36,7 +36,12 @@ export default function EmployeeSearch(props) {
             <div className="ext">
             <div className="popup-inner-search">
                 {props.rend ? getSearch(props.state): ''}
-                <div className="ss" onClick={() => props.setTrigSearch(false)}><FaTimes/></div>
+                <div className="ss" >
+                    <h1>Search Result</h1>
+                    <div className="exit" onClick={() => props.setTrigSearch(false)}><FaTimes/></div>
+                    
+                    
+                </div>
                 <div class="div-table">
                     <div class="div-table-row">
                         <div className="div-table-col lab"></div>
