@@ -48,6 +48,8 @@
 .div-table-row {
   display: flex;
   align-items: center;
+  color: #3a3a3a;
+  font-family: "Varela Round", sans-serif;
   width: 100%;
   clear: both;
 }
@@ -62,7 +64,7 @@
 
 .info {
   margin-top: 20px;
-  color: black;
+  color: rgb(95, 95, 95);
   font-size: 18px;
   border-radius: 20px;
   height: max-content;
