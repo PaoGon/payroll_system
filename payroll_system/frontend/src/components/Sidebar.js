@@ -2,21 +2,18 @@ import React, { useState } from 'react'
 import {SideBarData} from './SideBarData'
 import {FaBars, FaTimes} from 'react-icons/fa'
 import{IoSearch} from 'react-icons/io5'
-import EmployeeContent from './EmployeeContent';
 import EmployeeSearch from './EmployeeSearch'
 
 
 export default function Sidebar() {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
-    const [state, setState] = useState();
+    const [state, setState] = useState([]);
 
     //send this state to the data class of employee to render the search
     const [trigSearch, setTrigSearch] = useState(false)
 
-    // stores searched data
-    const [search, setSearch] = useState();
-
+    //lagay mo to
     const [rend, setRend] = useState(false);
     
     //gets the input in search bar
@@ -25,14 +22,10 @@ export default function Sidebar() {
     }
     // tuloy mo dito mamaya. don kana sa pag render nung search sa EmployeeContent
     function onPress(){
-        fetch(`search-employee?search=${state}`)
-        .then((response)=> response.json())
-        .then((data)=> setSearch(data))
-        .then(() => setRend(true))
-        .then(() => console.log(search))
-        .catch(err => console.log(err));
+         console.log(state)
+         setRend(true)
+         setTrigSearch(true)
     }
-
     return (
         <>
             <div className="navbar">
@@ -44,10 +37,10 @@ export default function Sidebar() {
                     <div className="search-box">
                         <input type='text' name='search' onChange={getSearch}/>
                     </div>
-                    <div className="xx" onClick={() => onPress()}>
+                    <div className="xx" onClick={onPress}>
                         <IoSearch/>
                     </div>
-                    {rend ? <EmployeeSearch search={search} trigSearch={trigSearch} setTrigSearch={setTrigSearch}/> : ''}
+                    <EmployeeSearch state={state} rend={rend} setRend={setRend} trigSearch={trigSearch} setTrigSearch={setTrigSearch}/>
                     <div className="menu-bars" onClick={showSidebar}>
                         {sidebar ? <FaTimes/> : <FaBars/>}
                     </div>

@@ -4,7 +4,6 @@ import {RiAddCircleFill} from 'react-icons/ri'
 import Popup from './Popup'
 import {PopupData} from './PopupData'
 import EmployeeContent from './EmployeeContent'
-import EmployeeSearch from './EmployeeSearch'
 
 export default function Employee(props) {
     const [click, setClick] = useState(false);

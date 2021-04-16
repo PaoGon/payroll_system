@@ -20,8 +20,6 @@ export default function EmployeeContent(props) {
         .then(()=> setRender(true))
         .then(() => props.setTrigger(false))
         .catch(err => console.log(err));
-
-        console.log(state)
     }
 
     // hundles delete
