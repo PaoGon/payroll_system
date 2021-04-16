@@ -17,7 +17,8 @@ class SearchEmployee(generics.ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['surname', 'name', 'middlename', 'employee_id']
+    search_fields = ['surname', 'name', 'middlename',
+                     'employee_id', 'employement_type', 'position']
 
 
 class DeleteEmployee(APIView):

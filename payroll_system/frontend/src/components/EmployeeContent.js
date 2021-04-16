@@ -3,6 +3,9 @@ import {FaRegUserCircle} from 'react-icons/fa'
 import {AiFillDelete} from 'react-icons/ai'
 import {AiFillEdit} from 'react-icons/ai'
 import {Button} from './Button'
+import {PopupData} from './PopupData'
+
+import Popup from './Popup'
 
 export default function EmployeeContent(props) {
 
@@ -10,6 +13,37 @@ export default function EmployeeContent(props) {
     const[state, setState] = useState();
     // trigger for render
     const[render, setRender] = useState(false);
+
+    // triggers edit action
+    const[edit, setEdit] = useState(false);
+
+    // stores the ID of the selected employee
+    const[id, setId] = useState();
+
+    // stores the data of the edit
+    const [data, setData] = useState({
+        name: "",
+        surname: "",
+        middlename: "",
+        status: "",
+        position: "",
+        employement_type: "",
+        fixed_rate: "",
+        sss_id: "",
+        tin_num: "",
+        phil_id: "",
+        pagibig_id: ""
+    });
+
+
+    // gets the data of the edit fields
+    function getData(val){
+        setData({
+            ...data,
+            [val.target.name]: val.target.value
+        });
+        
+    }
 
 
     // sends get reqeust to the API
@@ -32,6 +66,20 @@ export default function EmployeeContent(props) {
         fetch(`/delete-employee?id=${id}`, requestOptions)
         .then(() => getReq())
         .catch(err => console.log(err));  
+    }
+
+    function updateEmp(){
+        const requestOptions = {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data),
+            cache: "no-cache"
+        };
+        fetch(`/update-employee?id=${id}`, requestOptions)
+        .then(() => getReq())
+        .then(() => setEdit(false))
+        .catch(err => console.log(err));  
+
     }
 
     window.onload = () => getReq();
@@ -74,7 +122,10 @@ export default function EmployeeContent(props) {
                             <div className="div-table-col">{val.pagibig_id}</div>
                             <div className="div-table-col">{val.phil_id}</div>
                             <div className="div-table-col ed">
-                                <Button buttonColor='green'>
+                                <Button buttonColor='green' onClick={() => {
+                                    setEdit(true)
+                                    setId(val.id)
+                                }}>
                                     <AiFillEdit/>
                                     Edit
                                 </Button>
@@ -87,8 +138,23 @@ export default function EmployeeContent(props) {
                         </div>
                     )
                 }): ''}
-                 
             </div>
+
+            <Popup trigger={edit} setTrigger={setEdit} click={updateEmp}>
+                <div className="inputt">
+                    {PopupData.map((val, key) =>{
+                        return(
+                            <div className='contt'>
+                                <label key={key}>
+                                    <p>{val.label}</p> 
+                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData}></input>
+                                </label>
+                            </div>         
+                        );
+                    })}
+                </div>
+            </Popup>
+
         </div>
     )
 }
