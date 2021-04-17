@@ -1,0 +1,83 @@
+.payroll {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.payroll > div {
+  margin-bottom: 5px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 5;
+}
+
+.np {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  float: right;
+}
+
+.pay_cont {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  height: 60%;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-top: 25px solid #aaaaaa;
+  border-bottom: #aaaaaa;
+  background-color: #f6f6f6;
+}
+
+.inf {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 3;
+  background-color: #d4d4d4;
+  border-radius: 20px;
+}
+
+.gg {
+  display: flex;
+  margin-left: 2rem;
+  align-items: center;
+  height: 100%;
+  font-size: 8rem;
+  color: #4977ad;
+}
+
+.pos {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  font-size: 2rem;
+  font-family: "Varela Round", sans-serif;
+}
+
+.int {
+  flex: 1;
+  background-color: #cccccc;
+}
+
+.fields {
+  flex: 5;
+  border-radius: 20px;
+  background-color: #c2c2c2;
+}

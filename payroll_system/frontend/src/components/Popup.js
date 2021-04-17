@@ -14,7 +14,8 @@ function Popup(props) {
                 
                 <div className="pos">
                     <Button buttonColor='blue' onClick={() => props.click()}>
-                        <BiSend/>Submit
+                        <BiSend/>
+                        Submit
                     </Button>
                     <Button buttonColor='gray' onClick={() => props.setTrigger(false)}>
                         <FaTimes/>cancel

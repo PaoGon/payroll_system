@@ -97,6 +97,7 @@
 }
 
 .menu-bars {
+  display: flex;
   cursor: pointer;
   margin-right: 2rem;
   margin-left: 4rem;
