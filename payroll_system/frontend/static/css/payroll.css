@@ -33,8 +33,8 @@
   height: 60%;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  border-top: 25px solid #aaaaaa;
-  border-bottom: #aaaaaa;
+  border-top: 25px solid #c0c0c0;
+  /* border-bottom: #aaaaaa; */
   background-color: #f6f6f6;
 }
 
@@ -43,7 +43,7 @@
   flex-direction: row;
   align-items: center;
   flex: 3;
-  background-color: #d4d4d4;
+  background-color: #f6f6f6;
   border-radius: 20px;
 }
 
@@ -72,12 +72,70 @@
 }
 
 .int {
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  background-color: #cccccc;
+  border-left: 2px solid #c0c0c0;
+  border-right: 2px solid #c0c0c0;
+  background-color: #f6f6f6;
+}
+
+.int > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  font-weight: bold;
+}
+.int > p:nth-of-type(even) {
+  background-color: #d4d4d4;
+}
+.a {
+  flex: 1;
+}
+
+.b {
+  flex: 1;
+}
+
+.c {
+  flex: 1;
+}
+
+.h {
+  flex: 1;
 }
 
 .fields {
   flex: 5;
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
-  background-color: #c2c2c2;
+  background-color: #f6f6f6;
+}
+
+.fields > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.field-cont1 {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.field-cont2 {
+  flex: 1;
+}
+
+.field-cont3 {
+  flex: 1;
+}
+
+.field-cont4 {
+  flex: 1;
 }

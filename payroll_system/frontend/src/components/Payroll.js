@@ -20,15 +20,33 @@ function Payroll() {
                     <div className="inf">
                         <div className="gg">
                             <FaRegUserCircle/>
-                        </div>
+                        </div> 
                         <div className="details pos">
                             <p>name</p>
                             <p>ID</p>
                             <p>position</p>
                         </div>
                     </div>
-                    <div className="int"></div>
-                    <div className="fields"></div>
+                    <div className="int">
+                        <p className='a'>Allowences</p>
+                        <p className='b'>Bonus</p>
+                        <p className='c'>Cash Advance</p>
+                        <p className='h'>Holiday Pay</p>
+                    </div>
+                    <div className="fields">
+                        <div className="field-cont1">
+                            <input type="text"/>
+                        </div>  
+                        <div className="field-cont2">
+                            <input type="text"/>
+                        </div>
+                        <div className="field-cont3">
+                            <input type="text"/>
+                        </div>
+                        <div className="field-cont4">
+                            <input type="text"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="np">

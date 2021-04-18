@@ -3,7 +3,7 @@ import {Button} from './Button'
 import {FaTimes} from 'react-icons/fa'
 import {BiSend} from 'react-icons/bi'
 
-function Popup(props) {
+export default function Popup(props) {
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
@@ -27,4 +27,3 @@ function Popup(props) {
     ) : "";
 }
 
-export default Popup
