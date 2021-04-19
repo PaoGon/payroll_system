@@ -36,7 +36,7 @@ function Payroll() {
                     <div className="fields">
                         <div className="field-cont1">
                             <input type="text"/>
-                        </div>  
+                        </div>
                         <div className="field-cont2">
                             <input type="text"/>
                         </div>
