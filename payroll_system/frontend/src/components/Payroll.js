@@ -29,22 +29,30 @@ function Payroll() {
                     </div>
                     <div className="int">
                         <p className='a'>Allowences</p>
-                        <p className='b'>Bonus</p>
-                        <p className='c'>Cash Advance</p>
-                        <p className='h'>Holiday Pay</p>
+                        <p className='a'>Bonus</p>
+                        <p className='a'>Cash Advance</p>
+                        <p className='a'>Holiday Pay</p>
                     </div>
                     <div className="fields">
                         <div className="field-cont1">
-                            <input type="text"/>
+                            <div className="int1">
+                                <input type="number"/>
+                            </div>
+                        </div>
+                        <div className="field-cont1">
+                            <div className="int1">
+                                <input type="number"/>
+                            </div>
+                        </div>
+                        <div className="field-cont1">
+                            <div className="int1">
+                                <input type="number"/>
+                            </div>
                         </div>
                         <div className="field-cont2">
-                            <input type="text"/>
-                        </div>
-                        <div className="field-cont3">
-                            <input type="text"/>
-                        </div>
-                        <div className="field-cont4">
-                            <input type="text"/>
+                            <div className="int1">
+                                <input type="number"/>
+                            </div>
                         </div>
                     </div>
                 </div>

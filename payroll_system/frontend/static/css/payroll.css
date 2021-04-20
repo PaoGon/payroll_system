@@ -34,6 +34,7 @@
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-top: 25px solid #c0c0c0;
+  border-bottom: 2px solid #c0c0c0;
   /* border-bottom: #aaaaaa; */
   background-color: #f6f6f6;
 }
@@ -65,6 +66,7 @@
 .details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 100%;
   font-size: 2rem;
@@ -90,19 +92,8 @@
 .int > p:nth-of-type(even) {
   background-color: #d4d4d4;
 }
+
 .a {
-  flex: 1;
-}
-
-.b {
-  flex: 1;
-}
-
-.c {
-  flex: 1;
-}
-
-.h {
   flex: 1;
 }
 
@@ -112,6 +103,10 @@
   flex-direction: column;
   border-radius: 20px;
   background-color: #f6f6f6;
+}
+
+.fields > div:nth-of-type(even) {
+  background-color: #d4d4d4;
 }
 
 .fields > div {
@@ -124,18 +119,39 @@
 .field-cont1 {
   flex: 1;
   display: flex;
-  align-items: stretch;
   justify-content: center;
+  padding: 4px;
 }
 
 .field-cont2 {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 0 0 20px 0;
 }
 
-.field-cont3 {
-  flex: 1;
+.int1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c4c3c3;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
 }
 
-.field-cont4 {
-  flex: 1;
+.int1 > input {
+  border-radius: 10px;
+  border: none;
+  padding-left: 10px;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Varela Round", sans-serif;
+  color: #858282;
+  cursor: text;
 }
