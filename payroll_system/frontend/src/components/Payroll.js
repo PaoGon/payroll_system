@@ -21,7 +21,7 @@ function Payroll() {
                         <div className="gg">
                             <FaRegUserCircle/>
                         </div> 
-                        <div className="details pos">
+                        <div className="details pos s">
                             <p>name</p>
                             <p>ID</p>
                             <p>position</p>
