@@ -21,19 +21,7 @@ export default function EmployeeContent(props) {
     const[id, setId] = useState();
 
     // stores the data of the edit
-    const [data, setData] = useState({
-        name: "",
-        surname: "",
-        middlename: "",
-        status: "",
-        position: "",
-        employement_type: "",
-        fixed_rate: "",
-        sss_id: "",
-        tin_num: "",
-        phil_id: "",
-        pagibig_id: ""
-    });
+    const [data, setData] = useState({});
 
 
     // gets the data of the edit fields
@@ -78,6 +66,7 @@ export default function EmployeeContent(props) {
         fetch(`/update-employee?id=${id}`, requestOptions)
         .then(() => getReq())
         .then(() => setEdit(false))
+        .then(() => setData({}))
         .catch(err => console.log(err));  
 
     }

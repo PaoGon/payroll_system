@@ -48,7 +48,7 @@ export default function EmployeeSearch(props) {
 
 
     function getSearch(search_key){
-        fetch(`/search-employee?search=${search_key}`)
+        fetch(`/api/search-employee?search=${search_key}`)
         .then((response)=> response.json())
         .then((data) => setSearch(data))
         .then(() => setActivate(true))
@@ -62,7 +62,7 @@ export default function EmployeeSearch(props) {
             headers: {"Content-Type": "application/json"},
             cache: "no-cache"
         };
-        fetch(`/delete-employee?id=${id}`, requestOptions)
+        fetch(`/api/delete-employee?id=${id}`, requestOptions)
         .then(() => props.setTrigSearch(false))
         .catch(err => console.log(err));  
     }
@@ -74,7 +74,7 @@ export default function EmployeeSearch(props) {
             body: JSON.stringify(data),
             cache: "no-cache"
         };
-        fetch(`/update-employee?id=${id}`, requestOptions)
+        fetch(`/api/update-employee?id=${id}`, requestOptions)
         .then(() => getSearch(props.state))
         .then(() => setEdit(false))
         .catch(err => console.log(err));  

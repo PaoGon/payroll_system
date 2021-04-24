@@ -42,7 +42,7 @@ export default function Employee(props) {
             body: JSON.stringify(data),
             cache: "no-cache"
         };
-        fetch("/create-employee", requestOptions)
+        fetch("/api/create-employee", requestOptions)
             .then((response) =>response.json())
             // .then((data) => console.log(data))
             .then(() => setClick(false))
