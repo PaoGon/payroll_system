@@ -1,5 +1,10 @@
-from django.urls import path
-from .views import EmployeeView, CreateEmployeeView, SearchEmployee, DeleteEmployee, UpdateEmployee, PayrollView
+from django.urls import path, include
+from rest_framework import routers
+from .views import *
+
+router = routers.DefaultRouter()
+
+router.register(r'create-payroll', PayrollView, basename='payroll')
 
 urlpatterns = [
     path('api', EmployeeView.as_view()),
@@ -7,5 +12,5 @@ urlpatterns = [
     path('search-employee', SearchEmployee.as_view()),
     path('delete-employee', DeleteEmployee.as_view()),
     path('update-employee', UpdateEmployee.as_view()),
-    path('create-payroll', PayrollView.as_view()),
+    path('', include(router.urls)),
 ]

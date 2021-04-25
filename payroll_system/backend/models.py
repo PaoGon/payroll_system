@@ -18,9 +18,9 @@ class Payroll(models.Model):
     allowances = models.IntegerField(default=0)
     cash_advance = models.IntegerField(default=0)
     holiday_pay = models.IntegerField(default=0)
-    sss = models.CharField(max_length=50, default="")
-    pagibig = models.CharField(max_length=50, default="")
-    philhealth = models.CharField(max_length=50, default="")
+    sss = models.IntegerField(default=0)
+    pagibig = models.IntegerField(default=0)
+    philhealth = models.IntegerField(default=0)
 
     # def __str__(self):
     #     return string(self.allowances)

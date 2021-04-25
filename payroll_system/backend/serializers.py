@@ -3,29 +3,29 @@ from .models import Employee, Payroll
 
 
 # payroll model serializer
-class CreatePayroolSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedRelatedField(
-    )
-
+class CreatePayroolSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Payroll
-        fields = '__all__'
+        fields = ('url', 'id', 'allowances', 'cash_advance', 'holiday_pay')
 
 # Employee model serializers
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='payroll-detail'
+    )
+
     class Meta:
         model = Employee
-        fields = ('id', 'payroll', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
+        fields = ('url', 'id', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
                   'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
 
 
 class CreateEmployeeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Employee
-        fields = ('payroll', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
+        fields = ('employee_id', 'name', 'surname', 'middlename', 'status', 'position',
                   'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
 
 
