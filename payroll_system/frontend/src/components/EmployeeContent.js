@@ -36,7 +36,7 @@ export default function EmployeeContent(props) {
 
     // sends get reqeust to the API
     function getReq(){
-        fetch("/api")
+        fetch("/api/employee-list")
         .then((response)=>response.json())
         .then((data) => setState(data))
         .then(()=> setRender(true))
