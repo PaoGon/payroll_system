@@ -20,7 +20,7 @@ export default function Sidebar() {
     function getSearch(val){
         setState(val.target.value);
     }
-    // tuloy mo dito mamaya. don kana sa pag render nung search sa EmployeeContent
+    
     function onPress(){
          console.log(state)
          setRend(true)

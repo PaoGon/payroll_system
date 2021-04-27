@@ -13,7 +13,7 @@ class CreatePayroolSerializer(serializers.HyperlinkedModelSerializer):
 
 class EmployeeSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
-        view_name='payroll-detail'
+        view_name='payroll-detail',
     )
 
     class Meta:
@@ -41,6 +41,7 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
     tin_num = serializers.CharField(required=False)
     phil_id = serializers.CharField(required=False)
     pagibig_id = serializers.CharField(required=False)
+    payroll = serializers.CharField(required=False)
 
     class Meta:
         model = Employee

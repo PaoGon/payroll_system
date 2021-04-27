@@ -15,12 +15,17 @@ def gen_emp_id():
 
 
 class Payroll(models.Model):
-    allowances = models.IntegerField(default=0)
-    cash_advance = models.IntegerField(default=0)
-    holiday_pay = models.IntegerField(default=0)
-    sss = models.IntegerField(default=0)
-    pagibig = models.IntegerField(default=0)
-    philhealth = models.IntegerField(default=0)
+    allowances = models.CharField(
+        max_length=10, null=True, blank=True, default='')
+    cash_advance = models.CharField(
+        max_length=10, null=True, blank=True, default='')
+    holiday_pay = models.CharField(
+        max_length=10, null=True, blank=True, default='')
+    sss = models.CharField(max_length=10, null=True, blank=True, default='')
+    pagibig = models.CharField(
+        max_length=10, null=True, blank=True, default='')
+    philhealth = models.CharField(
+        max_length=10, null=True, blank=True, default='')
 
     # def __str__(self):
     #     return string(self.allowances)

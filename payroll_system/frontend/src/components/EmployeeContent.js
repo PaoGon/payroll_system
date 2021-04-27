@@ -51,7 +51,7 @@ export default function EmployeeContent(props) {
             headers: {"Content-Type": "application/json"},
             cache: "no-cache"
         };
-        fetch(`/delete-employee?id=${id}`, requestOptions)
+        fetch(`/api/delete-employee?id=${id}`, requestOptions)
         .then(() => getReq())
         .catch(err => console.log(err));  
     }
@@ -63,7 +63,7 @@ export default function EmployeeContent(props) {
             body: JSON.stringify(data),
             cache: "no-cache"
         };
-        fetch(`/update-employee?id=${id}`, requestOptions)
+        fetch(`/api/update-employee?id=${id}`, requestOptions)
         .then(() => getReq())
         .then(() => setEdit(false))
         .then(() => setData({}))
@@ -136,7 +136,7 @@ export default function EmployeeContent(props) {
                             <div className='contt'>
                                 <label key={key}>
                                     <p>{val.label}</p> 
-                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData}></input>
+                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
                                 </label>
                             </div>         
                         );

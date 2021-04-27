@@ -3,8 +3,11 @@
 }
 
 .navbar {
+  height: 10vh;
+  width: 100%;
+  position: sticky;
+  top: 0;
   background-color: #4977ad;
-  height: 80px;
   display: flex;
   align-items: center;
 }

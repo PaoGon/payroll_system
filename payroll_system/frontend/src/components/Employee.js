@@ -68,7 +68,7 @@ export default function Employee(props) {
                                     <div className='contt'>
                                         <label key={key}>
                                             <p>{val.label}</p> 
-                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData}></input>
+                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
                                         </label>
                                     </div>         
                                );
