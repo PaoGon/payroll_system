@@ -9,7 +9,9 @@ import { BrowserRouter as Router, Switch, Route, Link, Ridirect} from 'react-rou
 export default function Homepage() {
     return (
         <Router>
-            <Sidebar/>
+            <div className="exf">
+                <Sidebar/>
+            </div>
             <Switch>
                 <Route exact path="/"></Route>
                 <Route exact path="/dashboard" component={Dashboard}></Route>

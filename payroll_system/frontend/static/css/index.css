@@ -14,6 +14,19 @@ body {
 .container {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.exf {
+  flex: 0.5;
+  height: 15vh;
+  position: sticky;
+  top: 0;
+}
+
+.co {
+  flex: 5;
 }
 
 .plex {

@@ -51,7 +51,7 @@ export default function Employee(props) {
     }
 
     return (
-        <>
+        <div className='co'>
             <div className='employee'>
                 <div className="head">
                     <h1>Employee</h1>
@@ -84,7 +84,7 @@ export default function Employee(props) {
                     </div>
                 </div>
             </div>
-        </>     
+        </div>     
     )
 }
 

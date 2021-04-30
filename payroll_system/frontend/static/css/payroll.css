@@ -18,6 +18,19 @@
   flex: 5;
 }
 
+.pdetails {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pdetails > p {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
 .np {
   display: flex;
   align-items: center;
@@ -70,6 +83,7 @@
   align-items: center;
   height: 100%;
   font-size: 2rem;
+  text-transform: capitalize;
   font-family: "Varela Round", sans-serif;
 }
 

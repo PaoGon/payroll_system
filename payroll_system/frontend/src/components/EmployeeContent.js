@@ -102,9 +102,22 @@ export default function EmployeeContent(props) {
                                     {val.surname} {val.name } {val.middlename} 
                                 </div>
                             </div>
-                            <div className="div-table-col" >{val.position}</div>
-                            <div className="div-table-col">{val.status}</div>
-                            <div className="div-table-col">{val.employement_type}</div>
+                            <div className="div-table-col" >
+                                <div className="name">
+                                    {val.position}
+                                </div>
+                                
+                            </div>
+                            <div className="div-table-col">
+                                <div className="name">
+                                    {val.status}
+                                </div>
+                            </div>
+                            <div className="div-table-col">
+                                <div className="name">
+                                    {val.employement_type}    
+                                </div> 
+                            </div>
                             <div className="div-table-col">{val.employee_id}</div>
                             <div className="div-table-col">{val.sss_id}</div>
                             <div className="div-table-col">{val.tin_num}</div>
