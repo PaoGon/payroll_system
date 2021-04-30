@@ -46,3 +46,10 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = '__all__'
+
+
+# pagination serailaizer
+class PayrollPageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = ('id', 'name', 'surname', 'middlename', 'position')

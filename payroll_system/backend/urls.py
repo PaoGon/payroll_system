@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'create-payroll', PayrollView, basename='payroll')
 
 urlpatterns = [
+    path('payroll-list', PayrollPageview.as_view()),
     path('employee-list', EmployeeView.as_view()),
     path('create-employee', CreateEmployeeView.as_view()),
     path('search-employee', SearchEmployee.as_view()),

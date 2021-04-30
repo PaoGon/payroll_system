@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from rest_framework import generics, status, viewsets
-from .serializers import EmployeeSerializer, CreateEmployeeSerializer, UpdateEmployeeSerializer, CreatePayroolSerializer
+from .serializers import EmployeeSerializer, CreateEmployeeSerializer, UpdateEmployeeSerializer, CreatePayroolSerializer, PayrollPageSerializer
 from .models import Employee, Payroll
+from .pagination import PageNumberPagination
+
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import filters
+
+
 # Create your views here.
 
 
@@ -19,7 +24,7 @@ class PayrollView(viewsets.ModelViewSet):
     serializer_class = CreatePayroolSerializer
 
 
-class SearchEmployee(generics.ListAPIView):
+class SearchEmployee(APIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     filter_backends = [filters.SearchFilter]
@@ -67,6 +72,10 @@ class CreateEmployeeView(APIView):
         return Response({'Invalid request : Action Denied'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class PayrollPageview(generics.ListAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = PayrollPageSerializer
+    pagination_class = PageNumberPagination
 # Payroll page api views
 
 
