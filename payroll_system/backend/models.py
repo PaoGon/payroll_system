@@ -14,23 +14,6 @@ def gen_emp_id():
     return code
 
 
-class Payroll(models.Model):
-    allowances = models.CharField(
-        max_length=10, null=True, blank=True, default='')
-    cash_advance = models.CharField(
-        max_length=10, null=True, blank=True, default='')
-    holiday_pay = models.CharField(
-        max_length=10, null=True, blank=True, default='')
-    sss = models.CharField(max_length=10, null=True, blank=True, default='')
-    pagibig = models.CharField(
-        max_length=10, null=True, blank=True, default='')
-    philhealth = models.CharField(
-        max_length=10, null=True, blank=True, default='')
-
-    # def __str__(self):
-    #     return string(self.allowances)
-
-
 class Employee(models.Model):
     employee_id = models.CharField(
         "ID", unique=True, max_length=8, default=gen_emp_id)
@@ -45,11 +28,27 @@ class Employee(models.Model):
     tin_num = models.CharField("tin_num", max_length=30)
     phil_id = models.CharField("phil_id", max_length=30)
     pagibig_id = models.CharField("pagibig_id", max_length=30)
-    payroll = models.ForeignKey(
-        Payroll,  null=True, blank=True, on_delete=models.CASCADE)
+    # payroll = models.ForeignKey(
+    #     Payroll,  null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.employee_id + " " + self.name
+
+
+class Payroll(models.Model):
+    employee = models.ForeignKey(
+        Employee, related_name='payroll', on_delete=models.CASCADE)
+    allowances = models.IntegerField(null=True, blank=True, default=0)
+    cash_advance = models.IntegerField(null=True, blank=True, default=0)
+    holiday_pay = models.IntegerField(null=True, blank=True, default=0)
+    sss = models.CharField(max_length=10, null=True, blank=True, default='-')
+    pagibig = models.CharField(
+        max_length=10, null=True, blank=True, default='-')
+    philhealth = models.CharField(
+        max_length=10, null=True, blank=True, default='-')
+
+    # def __str__(self):
+    #     return self.allowances
 
 
 class Attendace(models.Model):
