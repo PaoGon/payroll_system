@@ -9,22 +9,22 @@ import Popup from './Popup'
 
 export default function EmployeeContent(props) {
 
-    // stores get data form the API
+    // *stores get data form the API
     const[state, setState] = useState();
     // trigger for render
     const[render, setRender] = useState(false);
 
-    // triggers edit action
+    // !triggers edit action
     const[edit, setEdit] = useState(false);
 
-    // stores the ID of the selected employee
+    // *stores the ID of the selected employee
     const[id, setId] = useState();
 
-    // stores the data of the edit
+    // *stores the data of the edit
     const [data, setData] = useState({});
 
 
-    // gets the data of the edit fields
+    // ?gets the data of the edit fields
     function getData(val){
         setData({
             ...data,
@@ -34,7 +34,7 @@ export default function EmployeeContent(props) {
     }
 
 
-    // sends get reqeust to the API
+    // ?sends get reqeust to the API
     function getReq(){
         fetch("/api/employee-list")
         .then((response)=>response.json())
@@ -44,7 +44,7 @@ export default function EmployeeContent(props) {
         .catch(err => console.log(err));
     }
 
-    // hundles delete
+    // ?hundles delete
     function deleteEmp(id){
         const requestOptions = {
             method: "DELETE",
@@ -56,6 +56,7 @@ export default function EmployeeContent(props) {
         .catch(err => console.log(err));  
     }
 
+    // ?hundles delete
     function updateEmp(){
         const requestOptions = {
             method: "PUT",
@@ -71,11 +72,14 @@ export default function EmployeeContent(props) {
 
     }
 
+    // ?activate the GET method when the page loaded
     window.onload = () => getReq();
     
 
     return(
         <div className="con">
+
+            {/* ?activates the GET method */}
             {props.trigger ? getReq() : ''}
 
             <div class="div-table">

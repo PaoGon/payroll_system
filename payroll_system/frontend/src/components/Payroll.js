@@ -4,43 +4,44 @@ import {BiSend} from 'react-icons/bi'
 import {FaRegUserCircle} from 'react-icons/fa'
 
 function Payroll() {
-    const [page, setPage] = useState();
-    const [render1, setRender1] = useState(false);
-    const [get, setGet] = useState(false);
-    const [duo, setDuo] = useState(false);
-    const [prev, setPrev] = useState(false);
-    const [next, setNext] = useState(true);
-    const [num, setNum] = useState({page : 1})
-    let num1 = 1;
 
+    // *stores GET data from the API
+    const [page, setPage] = useState();
+
+    // !triggers the render of the form
+    const [render1, setRender1] = useState(false);
+
+    // !triggers the get request
+    const [get, setGet] = useState(false);
+
+    // *check the state of previous button
+    const [prev, setPrev] = useState(false);
+
+    // *check the state of next button
+    const [next, setNext] = useState(true);
+
+    // *stores the value of current page
+    const [num, setNum] = useState({page : 1})
+
+    // ?hundles the GET request
     function getForm(page_num){
         fetch(`/api/payroll-list?page=${page_num}`)
         .then((response)=>response.json())
         .then((data) => setPage(data))
         .then(() => setRender1(true))
         .then(() => setGet(false))
-        // .then(() => setDuo(false))
         .catch(err => console.log(err));
     }
-    window.onload = () => getForm(num.page);
 
-    // function getResult(){
-    //     const object = page;
-    //     const res = object.results
-    //     setData(res);
-    //     setDuo(true);
-    // }
-
+    // ?check the page number
     function previous(){
         if(num.page <= 1){
             setPrev(false)
-            setDuo(false)
         }
         else{
             setPrev(true)
         }
         if(page.count == num.page){
-            setDuo(false)
             setNext(false)
         }
         else{
@@ -48,33 +49,38 @@ function Payroll() {
         }
     }
 
+    // ?triggers the state for the GET request 
     function next_page(){
-        // getForm(num1)
         previous()
         setGet(true)
         console.log(num.page)
     }
 
+    // ?increment the value of the page number state
     function inc_page_num(){
-        // num1 += 1
         setNum({
             page : num.page += 1
         })
         next_page()
     }
 
+    // ?decrement the value of the page number state
     function dec_page_num(){
-        // num.page -= 1
         setNum({
             page : num.page -= 1
         })
         next_page()
     }
 
+    // ?activate the GET request when the page loaded
+    window.onload = () => getForm(num.page);
+
     return (
         <div className='co'>
-            {/* {duo ? previous() :''} */}
+
+            {/* activates the GET request */}
             {get ? getForm(num.page) : ''}
+
             <div className='payroll'>
                 <div className="head">
                     <h1>Payroll</h1>
@@ -134,17 +140,13 @@ function Payroll() {
                     }) : ''}
                 </div>
                 <div className="np">
-                    {prev ? 
-                        <Button buttonColor='gray' onClick={() => dec_page_num()}>
-                            Previous
-                        </Button>  
-                    : ''}
-                    
-                    {next ? 
-                        <Button buttonColor='blue' onClick={() => inc_page_num()}>
+                    <Button buttonColor='gray' onClick={prev ? () => dec_page_num() : () => ''}>
+                        Previous
+                    </Button>  
+                     
+                    <Button buttonColor='blue' onClick={next ? () => inc_page_num(): () => ''}>
                         Next
-                        </Button>
-                    :''}
+                    </Button>
                     
                 </div>
                 
