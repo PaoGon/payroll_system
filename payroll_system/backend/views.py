@@ -31,7 +31,7 @@ class PayrollView(viewsets.ModelViewSet):
     serializer_class = CreatePayroolSerializer
 
 
-class SearchEmployee(APIView):
+class SearchEmployee(generics.ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     filter_backends = [filters.SearchFilter]
