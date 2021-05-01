@@ -32,23 +32,21 @@ class Employee(models.Model):
     #     Payroll,  null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.employee_id + " " + self.name
+        return str(self.id)
 
 
 class Payroll(models.Model):
     employee = models.ForeignKey(
-        Employee, related_name='payroll', on_delete=models.CASCADE)
+        Employee, related_name='payroll', null=True, blank=True, on_delete=models.CASCADE)
     allowances = models.IntegerField(null=True, blank=True, default=0)
     cash_advance = models.IntegerField(null=True, blank=True, default=0)
     holiday_pay = models.IntegerField(null=True, blank=True, default=0)
-    sss = models.CharField(max_length=10, null=True, blank=True, default='-')
-    pagibig = models.CharField(
-        max_length=10, null=True, blank=True, default='-')
-    philhealth = models.CharField(
-        max_length=10, null=True, blank=True, default='-')
+    sss = models.IntegerField(null=True, blank=True, default=0)
+    pagibig = models.IntegerField(null=True, blank=True, default=0)
+    philhealth = models.IntegerField(null=True, blank=True, default=0)
 
-    # def __str__(self):
-    #     return self.allowances
+    def __str__(self):
+        return self.employee.name
 
 
 class Attendace(models.Model):

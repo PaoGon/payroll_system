@@ -1,6 +1,13 @@
 from django.shortcuts import render
 from rest_framework import generics, status, viewsets
-from .serializers import EmployeeSerializer, CreateEmployeeSerializer, UpdateEmployeeSerializer, CreatePayroolSerializer, PayrollPageSerializer
+from .serializers import (
+    EmployeeSerializer,
+    CreateEmployeeSerializer,
+    UpdateEmployeeSerializer, CreatePayroolSerializer,
+    PayrollPageSerializer,
+    PayrollSerializer
+)
+
 from .models import Employee, Payroll
 from .pagination import PageNumberPagination
 
@@ -76,6 +83,11 @@ class PayrollPageview(generics.ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = PayrollPageSerializer
     pagination_class = PageNumberPagination
+
+
+class SampleView(generics.ListAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = PayrollSerializer
 # Payroll page api views
 
 

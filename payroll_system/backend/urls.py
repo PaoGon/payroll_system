@@ -13,5 +13,6 @@ urlpatterns = [
     path('search-employee', SearchEmployee.as_view()),
     path('delete-employee', DeleteEmployee.as_view()),
     path('update-employee', UpdateEmployee.as_view()),
+    path('sample-payroll', SampleView.as_view()),
     path('', include(router.urls)),
 ]

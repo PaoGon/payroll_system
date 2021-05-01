@@ -3,29 +3,39 @@ from .models import Employee, Payroll
 
 
 # payroll model serializer
-class CreatePayroolSerializer(serializers.HyperlinkedModelSerializer):
+class CreatePayroolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payroll
-        fields = ('url', 'id', 'allowances', 'cash_advance', 'holiday_pay')
+        fields = ('employee', 'id', 'allowances',
+                  'cash_advance', 'holiday_pay')
 
 # Employee model serializers
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name='payroll-detail',
+    class Meta:
+        model = Employee
+        fields = ('id', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
+                  'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
+
+
+class PayrollSerializer(serializers.ModelSerializer):
+    payroll = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='payroll-detail'
     )
 
     class Meta:
         model = Employee
-        fields = ('url', 'id', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
-                  'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
+        fields = ('id', 'name', 'surname',
+                  'middlename', 'fixed_rate', 'payroll')
 
 
 class CreateEmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('payroll', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
+        fields = ('employee_id', 'name', 'surname', 'middlename', 'status', 'position',
                   'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
 
 
