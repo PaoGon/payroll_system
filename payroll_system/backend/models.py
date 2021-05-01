@@ -36,12 +36,12 @@ class Employee(models.Model):
 class Payroll(models.Model):
     employee = models.ForeignKey(
         Employee, null=True, blank=True, on_delete=models.CASCADE)
-    allowances = models.IntegerField()
-    cash_advance = models.IntegerField()
-    holiday_pay = models.IntegerField()
-    sss = models.IntegerField()
-    pagibig = models.IntegerField()
-    philhealth = models.IntegerField()
+    allowances = models.IntegerField(null=True, blank=True)
+    cash_advance = models.IntegerField(null=True, blank=True)
+    holiday_pay = models.IntegerField(null=True, blank=True)
+    sss = models.IntegerField(null=True, blank=True)
+    pagibig = models.IntegerField(null=True, blank=True)
+    philhealth = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.employee.employee_id
