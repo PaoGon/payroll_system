@@ -31,19 +31,31 @@ export default function Sidebar() {
             <div className="navbar">
                 <div className="cont">
                     <h1 className="clk" onClick={() => {window.location.pathname = "/dashboard"}}>Vertex One</h1>
+                    <div className="logs">
+                        {SideBarData.map((val, key) =>{
+                            return (
+                                <div className="ic" key={key} onClick={() => {window.location.pathname = val.link}}>
+                                    <div className="nav-icon">{val.icon}</div>
+                                    <div className="nav-title">{val.title}</div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    
                 </div>
                 
+                {/* search bar */}
                 <div className="bx">
                     <div className="search-box">
-                        <input type='text' name='search' onChange={getSearch}/>
+                        <input type='text' name='search' onChange={getSearch} placeholder='Search Employee'/>
                     </div>
                     <div className="xx" onClick={onPress}>
                         <IoSearch/>
                     </div>
                     <EmployeeSearch state={state} rend={rend} setRend={setRend} trigSearch={trigSearch} setTrigSearch={setTrigSearch}/>
-                    <div className="menu-bars" onClick={showSidebar}>
+                    {/* <div className="menu-bars" onClick={showSidebar}>
                         {sidebar ? <FaTimes/> : <FaBars/>}
-                    </div>
+                    </div> */}
                 </div>
                 
             </div>

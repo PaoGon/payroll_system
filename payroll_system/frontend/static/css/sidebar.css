@@ -12,6 +12,13 @@
   align-items: center;
 }
 
+.logs {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-left: 3rem;
+}
+
 .clk {
   cursor: pointer;
   font-family: "Varela Round", sans-serif;
@@ -20,6 +27,7 @@
 
 .cont {
   display: flex;
+  flex-direction: row;
   flex: 2;
   margin-left: 20px;
 }
@@ -43,14 +51,29 @@
 .ic {
   display: flex;
   justify-content: center;
-  font-size: 3rem;
+  align-items: center;
+  /* font-size: 3rem; */
+  margin-right: 2rem;
+  font-weight: bold;
   color: #ffffff;
   cursor: pointer;
 }
+.nav-icon {
+  font-size: 35px;
+}
+.nav-title {
+  font-size: 20px;
+}
 
-.ic:hover {
+/* .ic:hover {
   transition: all 0.3 ease-out;
   color: #b2b2b2;
+} */
+
+.ic:hover > div {
+  transition: all 0.3 ease-out;
+  color: #b2b2b2;
+  font-size: 18px;
 }
 
 .xx {
@@ -61,6 +84,7 @@
   color: #4977ad;
   width: 35px;
   height: 35px;
+  margin-right: 5rem;
   margin-left: 5px;
   display: flex;
   justify-content: center;
@@ -88,6 +112,14 @@
   cursor: text;
 }
 
+.search-box ::placeholder {
+  color: #bdbdbd;
+}
+
+.search-box:hover ::placeholder {
+  color: #858282;
+}
+
 .search-box {
   display: flex;
   align-items: stretch;
@@ -96,7 +128,7 @@
   border-radius: 20px;
   height: 100%;
   width: 50%;
-  background-color: #b2b2b2;
+  /* background-color: #b2b2b2; */
 }
 
 .menu-bars {

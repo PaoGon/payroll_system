@@ -46,7 +46,7 @@ class Payroll(models.Model):
     philhealth = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
-        return self.employee.name
+        return str(self.id)
 
 
 class Attendace(models.Model):
