@@ -7,7 +7,7 @@ class CreatePayroolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payroll
         fields = ('employee', 'id', 'allowances',
-                  'cash_advance', 'holiday_pay', 'sss')
+                  'cash_advance', 'holiday_pay')
 
 # Employee model serializers
 

@@ -14,13 +14,6 @@ def gen_emp_id():
     return code
 
 
-def calc_sss():
-    sss = Employee.objects.get(fixed_rate)
-    print(sss, 'hello')
-    if sss != 0:
-        return (sss)
-
-
 class Employee(models.Model):
     employee_id = models.CharField(
         "ID", unique=True, max_length=8, default=gen_emp_id)
@@ -48,8 +41,7 @@ class Payroll(models.Model):
     allowances = models.IntegerField(null=True, blank=True, default=0)
     cash_advance = models.IntegerField(null=True, blank=True, default=0)
     holiday_pay = models.IntegerField(null=True, blank=True, default=0)
-    sss = models.CharField(max_length=50, null=True,
-                           blank=True, default=calc_sss)
+    sss = models.IntegerField(null=True, blank=True, default=0)
     pagibig = models.IntegerField(null=True, blank=True, default=0)
     philhealth = models.IntegerField(null=True, blank=True, default=0)
 
