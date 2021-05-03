@@ -7,7 +7,7 @@ class CreatePayroolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payroll
         fields = ('employee', 'id', 'allowances',
-                  'cash_advance', 'holiday_pay')
+                  'cash_advance', 'holiday_pay', 'sss')
 
 # Employee model serializers
 
@@ -58,7 +58,7 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# pagination serailaizer
+# *pagination serailaizer
 class PayrollPageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
