@@ -25,8 +25,13 @@
   color: #ffffff;
 }
 
+#clk-act {
+  font-size: 1rem;
+}
+
 .cont {
   display: flex;
+  align-items: center;
   flex-direction: row;
   flex: 2;
   margin-left: 20px;
@@ -84,12 +89,15 @@
   color: #4977ad;
   width: 35px;
   height: 35px;
-  margin-right: 5rem;
   margin-left: 5px;
   display: flex;
   justify-content: center;
   cursor: pointer;
   background-color: #ffffff;
+}
+
+#xx-act {
+  margin-right: 3.5rem;
 }
 
 .xx:hover {
@@ -135,7 +143,7 @@
   display: flex;
   cursor: pointer;
   margin-right: 2rem;
-  margin-left: 4rem;
+  margin-left: 1.5rem;
   font-size: 2rem;
   right: 5%;
   color: #ffffff;
