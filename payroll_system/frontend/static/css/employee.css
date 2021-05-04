@@ -7,8 +7,8 @@
 
 .employee > div {
   margin-bottom: 5px;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
 }
 
 .data {
@@ -55,7 +55,6 @@
 }
 
 .div-table-col {
-  float: left;
   text-align: center;
   display: table-column;
   margin-right: 10px;
@@ -89,7 +88,11 @@
   color: #4977ad;
 }
 .name {
-  max-width: max-content;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
 }
 
 .con {

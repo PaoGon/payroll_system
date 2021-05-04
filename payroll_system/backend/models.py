@@ -28,23 +28,25 @@ class Employee(models.Model):
     tin_num = models.CharField("tin_num", max_length=30)
     phil_id = models.CharField("phil_id", max_length=30)
     pagibig_id = models.CharField("pagibig_id", max_length=30)
+    # payroll = models.ForeignKey(
+    #     Payroll,  null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.employee_id + " " + self.name
+        return str(self.id)
 
 
 class Payroll(models.Model):
     employee = models.ForeignKey(
-        Employee, null=True, blank=True, on_delete=models.CASCADE)
-    allowances = models.IntegerField(null=True, blank=True)
-    cash_advance = models.IntegerField(null=True, blank=True)
-    holiday_pay = models.IntegerField(null=True, blank=True)
-    sss = models.IntegerField(null=True, blank=True)
-    pagibig = models.IntegerField(null=True, blank=True)
-    philhealth = models.IntegerField(null=True, blank=True)
+        Employee, related_name='payroll', null=True, blank=True, on_delete=models.CASCADE)
+    allowances = models.IntegerField(null=True, blank=True, default=0)
+    cash_advance = models.IntegerField(null=True, blank=True, default=0)
+    holiday_pay = models.IntegerField(null=True, blank=True, default=0)
+    sss = models.IntegerField(null=True, blank=True, default=0)
+    pagibig = models.IntegerField(null=True, blank=True, default=0)
+    philhealth = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
-        return self.employee.employee_id
+        return str(self.id)
 
 
 class Attendace(models.Model):

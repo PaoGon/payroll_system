@@ -9,34 +9,22 @@ import Popup from './Popup'
 
 export default function EmployeeContent(props) {
 
-    // stores get data form the API
+    // *stores get data form the API
     const[state, setState] = useState();
     // trigger for render
     const[render, setRender] = useState(false);
 
-    // triggers edit action
+    // !triggers edit action
     const[edit, setEdit] = useState(false);
 
-    // stores the ID of the selected employee
+    // *stores the ID of the selected employee
     const[id, setId] = useState();
 
-    // stores the data of the edit
-    const [data, setData] = useState({
-        name: "",
-        surname: "",
-        middlename: "",
-        status: "",
-        position: "",
-        employement_type: "",
-        fixed_rate: "",
-        sss_id: "",
-        tin_num: "",
-        phil_id: "",
-        pagibig_id: ""
-    });
+    // *stores the data of the edit
+    const [data, setData] = useState({});
 
 
-    // gets the data of the edit fields
+    // ?gets the data of the edit fields
     function getData(val){
         setData({
             ...data,
@@ -46,9 +34,9 @@ export default function EmployeeContent(props) {
     }
 
 
-    // sends get reqeust to the API
+    // ?sends get reqeust to the API
     function getReq(){
-        fetch("/api")
+        fetch("/api/employee-list")
         .then((response)=>response.json())
         .then((data) => setState(data))
         .then(()=> setRender(true))
@@ -56,18 +44,19 @@ export default function EmployeeContent(props) {
         .catch(err => console.log(err));
     }
 
-    // hundles delete
+    // ?hundles delete
     function deleteEmp(id){
         const requestOptions = {
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
             cache: "no-cache"
         };
-        fetch(`/delete-employee?id=${id}`, requestOptions)
+        fetch(`/api/delete-employee?id=${id}`, requestOptions)
         .then(() => getReq())
         .catch(err => console.log(err));  
     }
 
+    // ?hundles delete
     function updateEmp(){
         const requestOptions = {
             method: "PUT",
@@ -75,18 +64,22 @@ export default function EmployeeContent(props) {
             body: JSON.stringify(data),
             cache: "no-cache"
         };
-        fetch(`/update-employee?id=${id}`, requestOptions)
+        fetch(`/api/update-employee?id=${id}`, requestOptions)
         .then(() => getReq())
         .then(() => setEdit(false))
+        .then(() => setData({}))
         .catch(err => console.log(err));  
 
     }
 
+    // ?activate the GET method when the page loaded
     window.onload = () => getReq();
     
 
     return(
         <div className="con">
+
+            {/* ?activates the GET method */}
             {props.trigger ? getReq() : ''}
 
             <div class="div-table">
@@ -113,9 +106,22 @@ export default function EmployeeContent(props) {
                                     {val.surname} {val.name } {val.middlename} 
                                 </div>
                             </div>
-                            <div className="div-table-col" >{val.position}</div>
-                            <div className="div-table-col">{val.status}</div>
-                            <div className="div-table-col">{val.employement_type}</div>
+                            <div className="div-table-col" >
+                                <div className="name">
+                                    {val.position}
+                                </div>
+                                
+                            </div>
+                            <div className="div-table-col">
+                                <div className="name">
+                                    {val.status}
+                                </div>
+                            </div>
+                            <div className="div-table-col">
+                                <div className="name">
+                                    {val.employement_type}    
+                                </div> 
+                            </div>
                             <div className="div-table-col">{val.employee_id}</div>
                             <div className="div-table-col">{val.sss_id}</div>
                             <div className="div-table-col">{val.tin_num}</div>
@@ -147,7 +153,7 @@ export default function EmployeeContent(props) {
                             <div className='contt'>
                                 <label key={key}>
                                     <p>{val.label}</p> 
-                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData}></input>
+                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
                                 </label>
                             </div>         
                         );

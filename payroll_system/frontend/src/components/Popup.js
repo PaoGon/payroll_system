@@ -3,7 +3,7 @@ import {Button} from './Button'
 import {FaTimes} from 'react-icons/fa'
 import {BiSend} from 'react-icons/bi'
 
-function Popup(props) {
+export default function Popup(props) {
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
@@ -14,7 +14,8 @@ function Popup(props) {
                 
                 <div className="pos">
                     <Button buttonColor='blue' onClick={() => props.click()}>
-                        <BiSend/>Submit
+                        <BiSend/>
+                        Submit
                     </Button>
                     <Button buttonColor='gray' onClick={() => props.setTrigger(false)}>
                         <FaTimes/>cancel
@@ -26,4 +27,3 @@ function Popup(props) {
     ) : "";
 }
 
-export default Popup

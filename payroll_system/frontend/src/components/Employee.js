@@ -42,7 +42,7 @@ export default function Employee(props) {
             body: JSON.stringify(data),
             cache: "no-cache"
         };
-        fetch("/create-employee", requestOptions)
+        fetch("/api/create-employee", requestOptions)
             .then((response) =>response.json())
             // .then((data) => console.log(data))
             .then(() => setClick(false))
@@ -51,7 +51,7 @@ export default function Employee(props) {
     }
 
     return (
-        <>
+        <div className='co'>
             <div className='employee'>
                 <div className="head">
                     <h1>Employee</h1>
@@ -68,7 +68,7 @@ export default function Employee(props) {
                                     <div className='contt'>
                                         <label key={key}>
                                             <p>{val.label}</p> 
-                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData}></input>
+                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
                                         </label>
                                     </div>         
                                );
@@ -84,7 +84,7 @@ export default function Employee(props) {
                     </div>
                 </div>
             </div>
-        </>     
+        </div>     
     )
 }
 
