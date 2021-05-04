@@ -1,6 +1,7 @@
 .payroll {
   display: flex;
   height: 100%;
+  margin: 2rem;
   flex-direction: column;
   margin-top: 5px;
 }

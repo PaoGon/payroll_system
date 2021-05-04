@@ -29,10 +29,6 @@ body {
   top: 0;
 }
 
-.co {
-  flex: 5;
-}
-
 .plex {
   display: flex;
 }

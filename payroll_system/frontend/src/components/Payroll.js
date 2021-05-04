@@ -76,82 +76,79 @@ function Payroll() {
     window.onload = () => getForm(num.page);
 
     return (
-        <div className='co'>
-
+        <div className='payroll'>
             {/* activates the GET request */}
             {get ? getForm(num.page) : ''}
-
-            <div className='payroll'>
-                <div className="head">
-                    <h1>Payroll</h1>
-                    <div className="wrap">
-                        <Button buttonColor='blue' onClick={() => ''}>
-                            <BiSend/>
-                            Submit
-                        </Button>
-                    </div>
-                </div>
-                <div className="form">
-                    {render1 ? page.results.map((val, key) =>{
-                        return(
-                            <div className="pay_cont" key={key}>
-                            <div className="inf">
-                                <div className="gg">
-                                    <FaRegUserCircle/>
-                                </div> 
-                                <div className="details pos s">
-                                    <div className="pdetails">
-                                        <p>{val.name}</p>
-                                        <p>{val.surname}</p>
-                                    </div>
-                                    
-                                    {val.position}
-                                </div>
-                            </div>
-                            <div className="int">
-                                <p className='a'>Allowences</p>
-                                <p className='a'>Bonus</p>
-                                <p className='a'>Cash Advance</p>
-                                <p className='a'>Holiday Pay</p>
-                            </div>
-                            <div className="fields">
-                                <div className="field-cont1">
-                                    <div className="int1">
-                                        <input type="number"/>
-                                    </div>
-                                </div>
-                                <div className="field-cont1">
-                                    <div className="int1">
-                                        <input type="number"/>
-                                    </div>
-                                </div>
-                                <div className="field-cont1">
-                                    <div className="int1">
-                                        <input type="number"/>
-                                    </div>
-                                </div>
-                                <div className="field-cont2">
-                                    <div className="int1">
-                                        <input type="number"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>);
-                    }) : ''}
-                </div>
-                <div className="np">
-                    <Button buttonColor='gray' onClick={prev ? () => dec_page_num() : () => ''}>
-                        Previous
-                    </Button>  
-                     
-                    <Button buttonColor='blue' onClick={next ? () => inc_page_num(): () => ''}>
-                        Next
+            <div className="head">
+                <h1>Payroll</h1>
+                <div className="wrap">
+                    <Button buttonColor='blue' onClick={() => ''}>
+                        <BiSend/>
+                        Submit
                     </Button>
-                    
                 </div>
+            </div>
+            <div className="form">
+                {render1 ? page.results.map((val, key) =>{
+                    return(
+                        <div className="pay_cont" key={key}>
+                        <div className="inf">
+                            <div className="gg">
+                                <FaRegUserCircle/>
+                            </div> 
+                            <div className="details pos s">
+                                <div className="pdetails">
+                                    <p>{val.name}</p>
+                                    <p>{val.surname}</p>
+                                </div>
+                                
+                                {val.position}
+                            </div>
+                        </div>
+                        <div className="int">
+                            <p className='a'>Allowences</p>
+                            <p className='a'>Bonus</p>
+                            <p className='a'>Cash Advance</p>
+                            <p className='a'>Holiday Pay</p>
+                        </div>
+                        <div className="fields">
+                            <div className="field-cont1">
+                                <div className="int1">
+                                    <input type="number"/>
+                                </div>
+                            </div>
+                            <div className="field-cont1">
+                                <div className="int1">
+                                    <input type="number"/>
+                                </div>
+                            </div>
+                            <div className="field-cont1">
+                                <div className="int1">
+                                    <input type="number"/>
+                                </div>
+                            </div>
+                            <div className="field-cont2">
+                                <div className="int1">
+                                    <input type="number"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>);
+                }) : ''}
+            </div>
+            <div className="np">
+                <Button buttonColor='gray' onClick={prev ? () => dec_page_num() : () => ''}>
+                    Previous
+                </Button>  
+                    
+                <Button buttonColor='blue' onClick={next ? () => inc_page_num(): () => ''}>
+                    Next
+                </Button>
                 
             </div>
+            
         </div>
+
         
     )
 }

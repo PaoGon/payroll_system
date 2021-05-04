@@ -51,37 +51,35 @@ export default function Employee(props) {
     }
 
     return (
-        <div className='co'>
-            <div className='employee'>
-                <div className="head">
-                    <h1>Employee</h1>
-                    <div className="wrap">
-                        <Button buttonColor='blue' onClick= {() => setClick(true)}>
-                            <RiAddCircleFill/>
-                            Add
-                        </Button>
-                    </div>  
-                    <Popup trigger={click} setTrigger={setClick} click={buttonPressed}>
-                        <div className="inputt">
-                           {PopupData.map((val, key) =>{
-                               return(
-                                    <div className='contt'>
-                                        <label key={key}>
-                                            <p>{val.label}</p> 
-                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
-                                        </label>
-                                    </div>         
-                               );
-                           })}
-                        </div>
-                    </Popup>
-                </div>
-                <div className="data">
-
-                    {/* this will be triger to render the search */}
-                    <div className="contSearh">
-                        <EmployeeContent trigger={trigger} setTrigger={setTrigger}/>
+        <div className='employee'>
+            <div className="head">
+                <h1>Employee</h1>
+                <div className="wrap">
+                    <Button buttonColor='blue' onClick= {() => setClick(true)}>
+                        <RiAddCircleFill/>
+                        Add
+                    </Button>
+                </div>  
+                <Popup trigger={click} setTrigger={setClick} click={buttonPressed}>
+                    <div className="inputt">
+                        {PopupData.map((val, key) =>{
+                            return(
+                                <div className='contt'>
+                                    <label key={key}>
+                                        <p>{val.label}</p> 
+                                        <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                    </label>
+                                </div>         
+                            );
+                        })}
                     </div>
+                </Popup>
+            </div>
+            <div className="data">
+
+                {/* this will be triger to render the search */}
+                <div className="contSearh">
+                    <EmployeeContent trigger={trigger} setTrigger={setTrigger}/>
                 </div>
             </div>
         </div>     
