@@ -12,9 +12,55 @@
   margin-right: 3rem;
 }
 
-.card {
+.dash-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex: 1.5;
-  background-color: antiquewhite;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+  width: 20rem;
+  color: rgb(255, 255, 255);
+  border-radius: 20px;
+  background-color: rgb(73, 119, 173);
+  box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+}
+
+.dash-ico {
+  border-radius: 50%;
+  font-size: 25px;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  background-color: rgb(55, 91, 133);
+}
+
+#gross > img {
+  width: 50px;
+  height: 50px;
+}
+
+#sss > img {
+  width: 55px;
+  height: 40px;
+}
+
+#pg > img {
+  width: 50px;
+  height: 50px;
+}
+
+#phl > img {
+  width: 60px;
+  height: 65px;
 }
 
 .charts {
@@ -32,17 +78,18 @@
   align-items: center;
   padding: 1rem;
   border-radius: 20px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 15%);
 }
 
 .area {
-  height: 70%;
-  width: 70%;
+  height: 80%;
+  width: 73%;
   background-color: rgb(255, 255, 255);
 }
 
 .doug {
-  height: 70%;
-  width: 25%;
+  height: 80%;
+  width: 24%;
   background-color: rgb(255, 255, 255);
 }
 
@@ -70,7 +117,8 @@
 .line-val {
   flex: 2;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -83,4 +131,14 @@
   align-items: center;
   height: 100%;
   width: 50%;
+}
+
+.line-label {
+  margin-right: 2rem;
+  margin-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
