@@ -24,9 +24,9 @@ function LineChart() {
                             data: [43, 29, 25, 35, 36, 55, 40],
                             fill: {
                                 target: 'origin',
-                                above: 'rgba(73, 119, 173, 0.4)', 
+                                above: 'rgba(55, 129, 241, 0.8)', 
                               },
-                            borderColor: 'rgb(73, 119, 173)',
+                            borderColor: 'rgb(55, 129, 241)',
                             tension: 0.5
                         },
                         {
@@ -34,26 +34,29 @@ function LineChart() {
                             data: [65, 30, 40, 11, 56, 55, 29],
                             fill:{
                                 target: 'origin',
-                                above: 'rgba(69, 123, 165, 0.5)'
+                                above: 'rgba(97, 151, 233, 0.8)'
                             },
-                            borderColor: 'rgb(69, 123, 165)',
+                            borderColor: 'rgb(97, 151, 233)',
                             tension: 0.5
                         },
                         {
                             label: 'Gross Salary',
-                            data: [70, 32, 25, 31, 70, 90, 70],
+                            data: [70, 32, 25, 31, 65, 85, 70],
                             fill:{
                                 target: 'origin',
-                                above: 'rgba(97, 158, 190, 0.8)'
+                                above: 'rgba(82, 207, 255, 0.8)'
                             },
-                            borderColor: 'rgb(97, 158, 190)',
+                            borderColor: 'rgb(82, 207, 255)',
                             tension: 0.5
                         },
                         {
                             label: 'PHILHEALTH',
-                            data: [40, 21, 46, 21, 59, 89, 13],
-                            fill: true,
-                            borderColor: 'rgb(141, 189, 212)',
+                            data: [46, 26, 36, 46, 56, 79, 46],
+                            fill:{
+                                target: 'origin',
+                                above: 'rgba(195, 195, 213, 0.8)'
+                            },
+                            borderColor: 'rgb(195, 195, 213)',
                             tension: 0.5
                         },
                     ]

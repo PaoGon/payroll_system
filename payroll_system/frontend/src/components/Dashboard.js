@@ -27,7 +27,7 @@ export default function Dashboard() {
             </div>
             <div className="charts">
                 <div className="area">
-                    <div className="lab">
+                    <div className="labbb">
                         <p>Monthly Expenses</p>
                     </div>
                     <div className="line-val">
@@ -56,7 +56,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="doug">
-                    <div className="lab">
+                    <div className="labbb">
                         <p>Expenses</p>
                     </div>
                     <div className="val">
