@@ -25,9 +25,9 @@
   justify-content: space-between;
   height: 80%;
   width: 20rem;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-radius: 20px;
-  background-color: rgb(73, 119, 173);
+  background-color: rgb(252, 252, 252);
   box-shadow: 0 0 20px rgb(0 0 0 / 15%);
 }
 
@@ -40,7 +40,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  background-color: rgb(55, 91, 133);
+  background-color: #4977ad;
 }
 
 #gross > img {
@@ -101,9 +101,10 @@
   width: 100%;
 }
 
-.lab {
+.labbb {
   flex: 1;
   font-weight: bold;
+  color: #918e8e;
 }
 
 .val {
@@ -141,4 +142,8 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
+}
+
+.line-label > p {
+  color: #918e8e;
 }
