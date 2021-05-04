@@ -17,10 +17,10 @@ function DoughnutCharts() {
                         label: 'My First Dataset',
                         data: [300, 50, 100, 150],
                         backgroundColor: [
-                          'rgb(73, 119, 173)',
-                          'rgb(69, 123, 165)',
-                          'rgb(97, 158, 190)',
-                          'rgb(141, 189, 212)'
+                          'rgb(97, 151, 233)',
+                          'rgb(55, 129, 241)',
+                          'rgb(195, 195, 213)',
+                          'rgb(82, 207, 255)'
                         ],
                         hoverOffset: 4
                       }],
