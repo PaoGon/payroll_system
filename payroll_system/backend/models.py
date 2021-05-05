@@ -14,6 +14,63 @@ def gen_emp_id():
     return code
 
 
+def calc_phil_health(fixed_rate):
+
+    shares = {
+        'ee': 0,
+        'er': 0
+    }
+
+    if fixed_rate <= 10000.00:
+        shares['ee'] = fixed_rate/2
+        shares['er'] = fixed_rate/2
+
+        return shares
+
+    elif fixed_rate >= 10000.01:
+        shares['ee'] = (fixed_rate*3.5)/2
+        shares['er'] = (fixed_rate*3.5)/2
+
+        return shares
+
+
+def calc_sss_share(fixed_rate):
+
+    shares = {
+        'ee': 0,
+        'er': 0
+    }
+
+    init = 3250.00
+    final = 3749.99
+
+    sss_er_share = 307.50
+    sss_ee_share = 157.50
+
+    if fixed_rate <= 3250.00:
+        shares['er'] = 265.00
+        shares['ee'] = 135.00
+
+        return shares
+
+    while True:
+        if init <= fixed_rate <= final:
+            shares['ee'] = sss_ee_share
+            shares['er'] = sss_er_share
+
+            return shares
+
+        init += 500
+        final += 500
+
+        sss_ee_share += 22.5
+
+        if sss_er_share == 1242.50:
+            sss_er_share += 62.5
+        else:
+            sss_er_share += 42.5
+
+
 class Employee(models.Model):
     employee_id = models.CharField(
         "ID", unique=True, max_length=8, default=gen_emp_id)
@@ -37,13 +94,42 @@ class Employee(models.Model):
 
 class Payroll(models.Model):
     employee = models.ForeignKey(
-        Employee, related_name='payroll', null=True, blank=True, on_delete=models.CASCADE)
-    allowances = models.IntegerField(null=True, blank=True, default=0)
-    cash_advance = models.IntegerField(null=True, blank=True, default=0)
-    holiday_pay = models.IntegerField(null=True, blank=True, default=0)
-    sss = models.IntegerField(null=True, blank=True, default=0)
-    pagibig = models.IntegerField(null=True, blank=True, default=0)
-    philhealth = models.IntegerField(null=True, blank=True, default=0)
+        Employee, related_name='employee', null=True, blank=True, on_delete=models.CASCADE)
+    allowances = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    cash_advance = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    holiday_pay = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    sss_er_share = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    sss_ee_share = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    pagibig_er_share = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    pagibig_ee_share = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    philhealth_er_share = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    philhealth_ee_share = models.DecimalField(
+        null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+
+    def save(self, *args, **kwargs):
+        fixed_rate = self.employee.fixed_rate
+
+        share = calc_sss_share(fixed_rate)
+        ph = calc_phil_health(fixed_rate)
+
+        self.sss_ee_share = share['ee']
+        self.sss_er_share = share['er']
+
+        self.philhealth_ee_share = ph['ee']
+        self.philhealth_er_share = ph['er']
+
+        self.pagibig_ee_share = 100
+        self.pagibig_er_share = 100
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)

@@ -9,7 +9,7 @@ function DoughnutCharts() {
                 data = {{
                     labels: [
                         'SSS',
-                        'pagIbig',
+                        'PagIBIG',
                         'PHILHEALTH',
                         'Gross'
                       ],
