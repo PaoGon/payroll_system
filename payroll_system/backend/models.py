@@ -28,8 +28,8 @@ def calc_phil_health(fixed_rate):
         return shares
 
     elif fixed_rate >= 10000.01:
-        shares['ee'] = (fixed_rate*3.5)/2
-        shares['er'] = (fixed_rate*3.5)/2
+        shares['ee'] = (fixed_rate*0.035)/2
+        shares['er'] = (fixed_rate*0.035)/2
 
         return shares
 
@@ -94,7 +94,7 @@ class Employee(models.Model):
 
 class Payroll(models.Model):
     employee = models.ForeignKey(
-        Employee, related_name='employee', null=True, blank=True, on_delete=models.CASCADE)
+        Employee, related_name='payroll', null=True, blank=True, on_delete=models.CASCADE)
     allowances = models.DecimalField(
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
     cash_advance = models.DecimalField(
