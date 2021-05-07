@@ -5,6 +5,7 @@ from .views import *
 router = routers.DefaultRouter()
 
 router.register(r'create-payroll', PayrollView, basename='payroll')
+router.register(r'create-payslip', PayslipView, basename='payslip')
 
 urlpatterns = [
     path('payroll-list', PayrollPageview.as_view()),

@@ -21,6 +21,8 @@
 
 .head {
   flex: 1;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
   display: flex;
   align-items: center;
   font-family: "Varela Round", sans-serif;
@@ -76,6 +78,7 @@
   align-items: center;
   margin-top: 5px;
   margin-bottom: 5px;
+  margin-left: 10px;
   font-size: 5rem;
   color: #4977ad;
 }

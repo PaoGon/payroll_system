@@ -1,16 +1,15 @@
 .payroll {
   display: flex;
   height: 100%;
-  margin: 2rem;
   flex-direction: column;
   margin-top: 5px;
 }
 
-.payroll > div {
+/* .payroll > div {
   margin-bottom: 5px;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+} */
 
 .form {
   display: flex;
@@ -34,6 +33,7 @@
 
 .np {
   display: flex;
+  margin-right: 2.5rem;
   align-items: center;
   justify-content: flex-end;
   flex: 1;
@@ -44,7 +44,6 @@
   display: flex;
   flex-direction: row;
   width: 90%;
-  height: 60%;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-top: 25px solid #c0c0c0;
@@ -169,4 +168,15 @@
   font-family: "Varela Round", sans-serif;
   color: #858282;
   cursor: text;
+}
+
+.pay-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 20%;
+  text-transform: capitalize;
+  font-family: "Varela Round", sans-serif;
 }

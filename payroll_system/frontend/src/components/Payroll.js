@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
 import {Button} from './Button'
 import {BiSend} from 'react-icons/bi'
-import {FaRegUserCircle} from 'react-icons/fa'
+import {FaLessThanEqual, FaRegUserCircle} from 'react-icons/fa'
+import {VscOpenPreview} from 'react-icons/vsc'
 import {PayrollData} from './PayrollData'
+import Payslip from './Payslip'
 
 function Payroll() {
 
@@ -10,22 +12,34 @@ function Payroll() {
     const [page, setPage] = useState();
 
     // !triggers the render of the form
-    const [render1, setRender1] = useState(false);
+    const [render1, setRender1] = useState(false)
 
     // !triggers the get request
-    const [get, setGet] = useState(false);
+    const [get, setGet] = useState(false)
+
+    // !triggers the create payslip
+    const [pay, setPay] = useState(false)
+
+    // !triggers the payslip review
+    const [review, setReview] = useState(false)
+
+    // !triggers review button
+    const [bttn, setBttn] = useState(false)
 
     // *check the state of previous button
-    const [prev, setPrev] = useState(false);
+    const [prev, setPrev] = useState(false)
 
     // *check the state of next button
-    const [next, setNext] = useState(true);
+    const [next, setNext] = useState(true)
 
     // *stores the value of current page
     const [num, setNum] = useState({page : 1})
 
     // *stores the input data of the user
     const [data, setData] = useState({});
+
+    // *stores the fetch data of payslip
+    const [payslip, setPayslip] = useState([])
 
     // *stores the data of the created payroll
     const [respones, setResponse] = useState()
@@ -40,8 +54,23 @@ function Payroll() {
         
     }
 
+    function create_payslip(id){
+        const cont = {payroll: id['id']}
+
+        const requestOptions = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(cont),
+            cache: "no-cache"
+        };
+        fetch("/api/create-payslip/", requestOptions)
+            .then((response) =>response.json())
+            .then((data) => setPayslip([data]))
+            .catch(err => console.log(err));
+        
+    }
+
     function post_data(id, obj){
-        // obj['id'] = id;
         id.map((val, key) => {
             return(
                 obj['employee'] = val.id
@@ -56,6 +85,9 @@ function Payroll() {
         fetch("/api/create-payroll/", requestOptions)
             .then((response) =>response.json())
             .then((data) => setResponse(data))
+            .then(() => setPay(true))
+            .then(() => setPay(false))
+            .then(() => setBttn(true))
             .catch(err => console.log(err));
     }
 
@@ -89,7 +121,7 @@ function Payroll() {
     function next_page(){
         previous()
         setGet(true)
-        console.log(num.page)
+        setBttn(false)
     }
 
     // ?increment the value of the page number state
@@ -115,13 +147,27 @@ function Payroll() {
         <div className='payroll'>
             {/* activates the GET request */}
             {get ? getForm(num.page) : ''}
+
+            {/* tigger the create payslip */}
+            {pay ? create_payslip(respones): ''}
+
+            <Payslip data={payslip} page={page} review={review} setReview={setReview}/>
+
             <div className="head">
                 <h1>Payroll</h1>
                 <div className="wrap">
+                    {bttn ? 
+                        <Button buttonColor='green' onClick={() => setReview(true)}>
+                            <VscOpenPreview/>
+                            Review
+                        </Button>
+                    : ''}
+                    
                     <Button buttonColor='blue' onClick={() => post_data(page.results, data)}>
                         <BiSend/>
                         Submit
                     </Button>
+
                 </div>
             </div>
             <div className="form">
@@ -145,6 +191,9 @@ function Payroll() {
                             <p className='a'>Allowences</p>
                             <p className='a'>Cash Advance</p>
                             <p className='a'>Holiday Pay</p>
+                            <p className='a'>SSS Loan</p>
+                            <p className='a'>MP2</p>
+                            <p className='a'>HDMF Loan</p>
                         </div>
                         <div className="fields">
                             {PayrollData.map((val, key) => {

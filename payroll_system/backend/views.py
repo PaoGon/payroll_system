@@ -3,12 +3,14 @@ from rest_framework import generics, status, viewsets
 from .serializers import (
     EmployeeSerializer,
     CreateEmployeeSerializer,
-    UpdateEmployeeSerializer, CreatePayroolSerializer,
+    UpdateEmployeeSerializer,
+    CreatePayrollSerializer,
     PayrollPageSerializer,
-    PayrollSerializer
+    PayrollSerializer,
+    CreatePayslipSerializer
 )
 
-from .models import Employee, Payroll
+from .models import Employee, Payroll, Payslip
 from .pagination import PageNumberPagination
 
 
@@ -28,7 +30,12 @@ class EmployeeView(generics.ListAPIView):
 
 class PayrollView(viewsets.ModelViewSet):
     queryset = Payroll.objects.all()
-    serializer_class = CreatePayroolSerializer
+    serializer_class = CreatePayrollSerializer
+
+
+class PayslipView(viewsets.ModelViewSet):
+    queryset = Payslip.objects.all()
+    serializer_class = CreatePayslipSerializer
 
 
 class SearchEmployee(generics.ListAPIView):

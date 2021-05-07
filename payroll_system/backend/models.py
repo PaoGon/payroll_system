@@ -71,6 +71,28 @@ def calc_sss_share(fixed_rate):
             sss_er_share += 42.5
 
 
+def comp_payslip(fixed_rate, loan, cont, allowance, holiday_pay):
+    gross_salary = fixed_rate
+
+    total_cont = cont['sss'] + cont['pg'] + cont['ph']
+    tax = gross_salary - total_cont
+
+    total_loan = loan['sss_loan'] + loan['mp2'] + loan['hdmf'] + loan['cash']
+
+    total_deduction = tax + total_loan
+
+    net_pay = (gross_salary - total_deduction) + allowance + holiday_pay
+
+    pay = {
+        'gross_salary': gross_salary,
+        'deduction': total_deduction,
+        'net_pay': net_pay,
+        'bonus': holiday_pay
+    }
+
+    return pay
+
+
 class Employee(models.Model):
     employee_id = models.CharField(
         "ID", unique=True, max_length=8, default=gen_emp_id)
@@ -101,6 +123,10 @@ class Payroll(models.Model):
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
     holiday_pay = models.DecimalField(
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    sss_loan = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    mp2 = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    hdmf_loan = models.DecimalField(max_digits=7, decimal_places=2, default=2)
+
     sss_er_share = models.DecimalField(
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
     sss_ee_share = models.DecimalField(
@@ -151,13 +177,41 @@ class Attendace(models.Model):
 class Payslip(models.Model):
     payroll = models.ForeignKey(
         Payroll, null=True, blank=True, on_delete=models.CASCADE)
-    gross_salary = models.IntegerField()
-    total_bonus = models.IntegerField()
-    deduction = models.IntegerField()
-    net_pay = models.IntegerField()
+    gross_salary = models.DecimalField(
+        max_digits=7, decimal_places=2, default=0)
+    total_bonus = models.DecimalField(
+        max_digits=7, decimal_places=2, default=0)
+    deduction = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    net_pay = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+
+    def save(self, *args, **kwargs):
+        fixed_rate = self.payroll.employee.fixed_rate
+        allowance = self.payroll.allowances
+        holiday_pay = self.payroll.holiday_pay
+        loan = {
+            'sss_loan': self.payroll.sss_loan,
+            'mp2': self.payroll.mp2,
+            'hdmf': self.payroll.hdmf_loan,
+            'cash': self.payroll.cash_advance,
+        }
+
+        cont = {
+            'sss': self.payroll.sss_ee_share,
+            'pg': self.payroll.pagibig_ee_share,
+            'ph': self.payroll.philhealth_ee_share,
+        }
+
+        data = comp_payslip(fixed_rate, loan, cont, allowance, holiday_pay)
+
+        self.gross_salary = data['gross_salary']
+        self.total_bonus = data['bonus']
+        self.deduction = data['deduction']
+        self.net_pay = data['net_pay']
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.payroll.employee.employee_id
+        return self.payroll.employee.name
 
 
 class Expenses(models.Model):

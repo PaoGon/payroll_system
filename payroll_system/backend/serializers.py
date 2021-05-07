@@ -1,42 +1,109 @@
 from rest_framework import serializers
-from .models import Employee, Payroll
+from .models import Employee, Payroll, Payslip
 
 
-# payroll model serializer
-class CreatePayroolSerializer(serializers.ModelSerializer):
+# *payroll model serializer
+class CreatePayrollSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payroll
-        fields = ('employee', 'id', 'allowances',
-                  'cash_advance', 'holiday_pay')
+        fields = (
+            'employee',
+            'id',
+            'allowances',
+            'cash_advance',
+            'holiday_pay',
+            'sss_loan',
+            'mp2',
+            'hdmf_loan'
+        )
 
-# Employee model serializers
+
+# *payslip model serializer
+class CreatePayslipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payslip
+        fields = '__all__'
+
+# *Employee model serializers
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('id', 'employee_id', 'name', 'surname', 'middlename', 'status', 'position',
-                  'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
+        fields = (
+            'id',
+            'employee_id',
+            'name',
+            'surname',
+            'middlename',
+            'status',
+            'position',
+            'employement_type',
+            'fixed_rate',
+            'sss_id',
+            'tin_num',
+            'phil_id',
+            'pagibig_id'
+        )
+
+
+class PayrollDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payroll
+        fields = (
+            'id',
+            'allowances',
+            'cash_advance',
+            'holiday_pay',
+            'sss_loan',
+            'mp2',
+            'hdmf_loan',
+            'sss_er_share',
+            'sss_ee_share',
+            'philhealth_er_share',
+            'philhealth_ee_share',
+            'pagibig_er_share',
+            'pagibig_ee_share'
+
+        )
 
 
 class PayrollSerializer(serializers.ModelSerializer):
-    payroll = serializers.HyperlinkedRelatedField(
+    payroll = PayrollDetailSerializer(
         many=True,
         read_only=True,
-        view_name='payroll-detail'
     )
 
     class Meta:
         model = Employee
-        fields = ('id', 'name', 'surname',
-                  'middlename', 'fixed_rate', 'payroll')
+        fields = (
+            'id',
+            'name',
+            'surname',
+            'middlename',
+            'fixed_rate',
+            'payroll'
+        )
 
 
 class CreateEmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('employee_id', 'name', 'surname', 'middlename', 'status', 'position',
-                  'employement_type', 'fixed_rate', 'sss_id', 'tin_num', 'phil_id', 'pagibig_id')
+        fields = (
+            'employee_id',
+            'name',
+            'surname',
+            'middlename',
+            'status',
+            'position',
+            'employement_type',
+            'fixed_rate',
+            'sss_id',
+            'tin_num',
+            'phil_id',
+            'pagibig_id'
+        )
 
 
 class UpdateEmployeeSerializer(serializers.ModelSerializer):
@@ -62,4 +129,10 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
 class PayrollPageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('id', 'name', 'surname', 'middlename', 'position')
+        fields = (
+            'id',
+            'name',
+            'surname',
+            'middlename',
+            'position'
+        )

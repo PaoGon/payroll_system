@@ -84,13 +84,12 @@ export default function EmployeeSearch(props) {
     return (props.trigSearch) ?(
         <div className="popup">
             <div className="ext">
-            <div className="popup-inner-search">
+                <div className="popup-inner-search">
                 {props.rend ? getSearch(props.state): ''}
                 <div className="ss" >
                     <h1>Search Result</h1>
-                    <div className="exit" onClick={() => props.setTrigSearch(false)}><FaTimes/></div>
-                    
-                    
+                    <div className="exit" onClick={() => props.setTrigSearch(false)}><FaTimes/>
+                    </div>
                 </div>
                 <div class="div-table">
                     <div class="div-table-row">
@@ -110,7 +109,9 @@ export default function EmployeeSearch(props) {
                 {activate ? search.map((val, key) => {
                     return(
                         <div class="div-table-row info" key = {key}>
-                            <div className="div-table-col icon"><FaRegUserCircle/></div>
+                            <div className="div-table-col icon">
+                                <FaRegUserCircle/>
+                            </div>
                             <div className="div-table-col">
                                 <div className="name">
                                     {val.surname} {val.name } {val.middlename} 
