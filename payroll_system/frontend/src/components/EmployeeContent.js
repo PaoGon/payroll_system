@@ -11,7 +11,7 @@ export default function EmployeeContent(props) {
 
     // *stores get data form the API
     const[state, setState] = useState();
-    // trigger for render
+    // !trigger for render
     const[render, setRender] = useState(false);
 
     // !triggers edit action
@@ -81,7 +81,7 @@ export default function EmployeeContent(props) {
 
             {/* ?activates the GET method */}
             {props.trigger ? getReq() : ''}
-
+            
             <div class="div-table">
                 <div class="div-table-row">
                     <div className="div-table-col lab"></div>

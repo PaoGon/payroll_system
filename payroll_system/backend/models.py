@@ -73,13 +73,13 @@ def calc_sss_share(fixed_rate):
 
 def comp_payslip(fixed_rate, loan, cont, allowance, holiday_pay):
     gross_salary = fixed_rate
-
     total_cont = cont['sss'] + cont['pg'] + cont['ph']
+
     tax = gross_salary - total_cont
 
     total_loan = loan['sss_loan'] + loan['mp2'] + loan['hdmf'] + loan['cash']
 
-    total_deduction = tax + total_loan
+    total_deduction = tax - total_loan
 
     net_pay = (gross_salary - total_deduction) + allowance + holiday_pay
 
@@ -176,7 +176,7 @@ class Attendace(models.Model):
 
 class Payslip(models.Model):
     payroll = models.ForeignKey(
-        Payroll, null=True, blank=True, on_delete=models.CASCADE)
+        Payroll, related_name='payslip', null=True, blank=True, on_delete=models.CASCADE)
     gross_salary = models.DecimalField(
         max_digits=7, decimal_places=2, default=0)
     total_bonus = models.DecimalField(

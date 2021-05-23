@@ -3,7 +3,6 @@ import {FaTimes} from 'react-icons/fa'
 import {FaRegUserCircle} from 'react-icons/fa'
 
 export default function Payslip(props) {
-    const data = props.data
     return (props.review) ?(
         <div className='popup'>
           <div className="ext">
@@ -22,7 +21,7 @@ export default function Payslip(props) {
                     <div className="div-table-col lab">Net Pay</div>
                   </div>
                 </div>
-                  {data.map((val, key) => {
+                  {props.data.map((val, key) => {
                     return(
                       <div className='div-table-row info' key={key}>
                         {props.page.results.map((val, key) => {
@@ -48,13 +47,7 @@ export default function Payslip(props) {
                       
                     )
                   })}
-                  
-
               </div>
-                
-
-
-
           </div>
         </div>
     ): '';

@@ -24,9 +24,8 @@ class CreatePayslipSerializer(serializers.ModelSerializer):
         model = Payslip
         fields = '__all__'
 
+
 # *Employee model serializers
-
-
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
@@ -47,7 +46,23 @@ class EmployeeSerializer(serializers.ModelSerializer):
         )
 
 
+class PayslipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payslip
+        fields = (
+            'id',
+            'gross_salary',
+            'total_bonus',
+            'deduction',
+            'net_pay'
+        )
+
+
 class PayrollDetailSerializer(serializers.ModelSerializer):
+    payslip = PayslipSerializer(
+        many=True,
+        read_only=True
+    )
 
     class Meta:
         model = Payroll
@@ -64,8 +79,8 @@ class PayrollDetailSerializer(serializers.ModelSerializer):
             'philhealth_er_share',
             'philhealth_ee_share',
             'pagibig_er_share',
-            'pagibig_ee_share'
-
+            'pagibig_ee_share',
+            'payslip',
         )
 
 

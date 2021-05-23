@@ -7,7 +7,8 @@ from .serializers import (
     CreatePayrollSerializer,
     PayrollPageSerializer,
     PayrollSerializer,
-    CreatePayslipSerializer
+    CreatePayslipSerializer,
+    PayrollDetailSerializer
 )
 
 from .models import Employee, Payroll, Payslip
@@ -95,6 +96,7 @@ class PayrollPageview(generics.ListAPIView):
 class SampleView(generics.ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = PayrollSerializer
+
 # Payroll page api views
 
 

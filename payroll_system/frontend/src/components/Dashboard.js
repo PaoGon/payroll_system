@@ -33,19 +33,19 @@ export default function Dashboard() {
                     <div className="line-val">
                         <div className="line-label">
                             <p>PagIBIG</p>
-                            <h1>$ 40k</h1>
+                            <h1>₱ 40k</h1>
                         </div>
                         <div className="line-label">
                             <p>SSS</p>
-                            <h1>$ 29k</h1>
+                            <h1>₱ 29k</h1>
                         </div>
                         <div className="line-label">
                             <p>Gross Salary</p>
-                            <h1>$ 70k</h1>
+                            <h1>₱ 70k</h1>
                         </div>
                         <div className="line-label">
                             <p>PHILHEALTH</p>
-                            <h1>$ 13k</h1>
+                            <h1>₱ 13k</h1>
                         </div>
 
                     </div>
@@ -60,7 +60,7 @@ export default function Dashboard() {
                         <p>Expenses</p>
                     </div>
                     <div className="val">
-                        <h1>$ 395k</h1>
+                        <h1>₱ 395k</h1>
                     </div>
                     <div className="doug-chart">
                         <DoughnutCharts/>
