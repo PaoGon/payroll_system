@@ -94,7 +94,7 @@ class PayrollPageview(generics.ListAPIView):
 
 
 class SampleView(generics.ListAPIView):
-    queryset = Employee.objects.all()
+    queryset = Employee.objects.get_queryset().order_by('id')
     serializer_class = PayrollSerializer
 
 # Payroll page api views

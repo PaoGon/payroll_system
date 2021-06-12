@@ -73,7 +73,10 @@ export default function EmployeeContent(props) {
     }
 
     // ?activate the GET method when the page loaded
-    window.onload = () => getReq();
+    window.onload = () => {
+        console.log('ok')
+        getReq()
+    }
     
 
     return(

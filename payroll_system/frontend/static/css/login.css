@@ -1,0 +1,106 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+.register {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 60%;
+  width: 30%;
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: #f6f6f6;
+}
+
+.reg-inputs {
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.reg-btn {
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  color: #858282;
+}
+
+.log-cont {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  height: 55%;
+  width: 30%;
+  padding: 1rem;
+
+  border-radius: 20px;
+  background-color: #f6f6f6;
+}
+
+.log-inputs {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.log-fields {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: space-between;
+
+  width: 100%;
+}
+
+.log-fields > input {
+  margin-bottom: 15px;
+  width: 80%;
+  border-radius: 15px;
+  padding-left: 10px;
+  height: 100%;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: "Varela Round", sans-serif;
+  color: #9b9797;
+  cursor: text;
+  border: 6px solid #b6b2b2;
+}
+
+.log-fields ::placeholder {
+  color: #bdbdbd;
+}
+
+.log-fields:hover ::placeholder {
+  color: #858282;
+}
+
+.log-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

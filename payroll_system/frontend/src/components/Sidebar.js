@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
+import {Link, NavLink} from 'react-router-dom'
 import {SideBarData} from './SideBarData'
 import {FaBars, FaTimes} from 'react-icons/fa'
 import{IoSearch} from 'react-icons/io5'
 import EmployeeSearch from './EmployeeSearch'
 
+import { connect } from 'react-redux'
+import { logout } from '../actions/auth'
+import { BiWindows } from 'react-icons/bi'
 
-export default function Sidebar() {
+
+function Sidebar({ isAuthenticated, logout }) {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
     const [state, setState] = useState([]);
@@ -19,6 +24,8 @@ export default function Sidebar() {
 
     // !triggers render
     const [rend, setRend] = useState(false);
+
+
     
     //?gets the input in search bar
     function get_search(val){
@@ -50,11 +57,17 @@ export default function Sidebar() {
 
     return (
         <>
-            <div className="navbar">
-                <div className="cont">
-                    <h1 className="clk" id={act ? 'clk-act' : ''} onClick={() => {window.location.pathname = "/dashboard"}}>Vertex One</h1>
-                    {navs ?
-                        <div className="logs">
+            <nav className="navbar">
+                <Fragment>
+                    <div className="clk">
+                        <h1 id={act ? 'clk-act' : ''} onClick={() => {window.location.pathname = "/dashboard"}}>
+                            Vertex One
+                        </h1>
+
+                    </div>
+                    
+                    {isAuthenticated ?
+                        <Fragment>
                             {SideBarData.map((val, key) =>{
                                 return (
                                     <div className="ic" key={key} onClick={() => {window.location.pathname = val.link}}>
@@ -63,12 +76,28 @@ export default function Sidebar() {
                                     </div>
                                 );
                             })}
-                        </div>
-                    : ''}
-                </div>
+                            <li className="ic">
+                                <a className="nav-title" onClick={() => {
+                                    logout()
+                                    window.location.pathname = "/login"
+
+                                }}  href='#!'>Logout</a>
+                            </li>
+                        </Fragment>
+                       
+                    : 
+                        <Fragment>
+                            <li className="ic">
+                                <NavLink className="nav-title" to='/login'>Login</NavLink>
+                            </li>
+                        </Fragment>
+                    }
+                </Fragment>
                 
                 {/* search bar */}
-                <div className="bx">
+
+                {isAuthenticated ? 
+                    <Fragment>
                     <div className="search-box">
                         <input type='text' name='search' onChange={get_search  } placeholder='Search Employee'/>
                     </div>
@@ -83,9 +112,12 @@ export default function Sidebar() {
                             {sidebar ? <FaTimes/> : <FaBars/>}
                         </div>  
                     : ''}
-                </div>
+                    </Fragment>              
+                                    
+                : ''}
                 
-            </div>
+                
+            </nav>
             <div className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                 <div className="shape">
                     <div className="inner">
@@ -107,3 +139,7 @@ export default function Sidebar() {
         </>
     )
 }
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+export default connect(mapStateToProps, { logout })(Sidebar)
