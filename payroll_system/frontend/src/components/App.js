@@ -22,16 +22,12 @@ export default function App() {
         <Provider store={store}>
             <Router>
                 <Layout>
-                    <Switch>
-                        <PrivateRoute exact path="/" component={Homepage}/>
-                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-                        <PrivateRoute exact path="/employee" component={Employee}/>
-                        <PrivateRoute exact path="/payroll" component={Payroll}/>
-                        <PrivateRoute exact path="/payslip" component={Payslip}/>
-                        <Route exact path="/login" component={Login}/>
-
-                    </Switch>
-                        
+                    <PrivateRoute exact path="/" component={Homepage}/>
+                    <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                    <PrivateRoute exact path="/employee" component={Employee}/>
+                    <PrivateRoute exact path="/payroll" component={Payroll}/>
+                    <PrivateRoute exact path="/payslip" component={Payslip}/>
+                    <Route exact path="/login" component={Login}/>
 
                 </Layout>
             </Router>
