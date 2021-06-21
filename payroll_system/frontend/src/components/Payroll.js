@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
+import Cookies from 'js-cookie'
 import {Button} from './Button'
 import {BiSend} from 'react-icons/bi'
 import {FaLessThanEqual, FaRegUserCircle} from 'react-icons/fa'
 import {VscOpenPreview} from 'react-icons/vsc'
 import {PayrollData} from './PayrollData'
 import Payslip from './Payslip'
+
 
 function Payroll() {
 
@@ -15,7 +17,7 @@ function Payroll() {
     const [render1, setRender1] = useState(false)
 
     // !triggers the get request
-    const [get, setGet] = useState(false)
+    const [get, setGet] = useState(true)
 
     // !triggers the create payslip
     const [pay, setPay] = useState(false)
@@ -59,7 +61,10 @@ function Payroll() {
 
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             body: JSON.stringify(cont),
             cache: "no-cache"
         };
@@ -69,7 +74,7 @@ function Payroll() {
             .catch(err => console.log(err));
         
     }
-
+    //? hundles POST request
     function post_data(id, obj){
         id.map((val, key) => {
             return(
@@ -78,7 +83,10 @@ function Payroll() {
         })  
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             body: JSON.stringify(obj),
             cache: "no-cache"
         };
@@ -93,11 +101,11 @@ function Payroll() {
 
     // ?hundles the GET request
     function getForm(page_num){
+        setGet(false)
         fetch(`/api/payroll-list?page=${page_num}`)
         .then((response)=>response.json())
         .then((data) => setPage(data))
         .then(() => setRender1(true))
-        .then(() => setGet(false))
         .catch(err => console.log(err));
     }
 
@@ -139,9 +147,6 @@ function Payroll() {
         })
         next_page()
     }
-
-    // ?activate the GET request when the page loaded
-    window.onload = () => getForm(num.page);
 
     return (
         <div className='payroll'>

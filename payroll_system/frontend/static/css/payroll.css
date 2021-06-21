@@ -180,3 +180,154 @@
   text-transform: capitalize;
   font-family: "Varela Round", sans-serif;
 }
+
+/* user payroll css */
+.pay-card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 15%);
+  background-color: rgb(255, 255, 255);
+  font-family: "Varela Round", sans-serif;
+}
+
+.sett {
+  margin-top: 20px;
+  color: rgb(95, 95, 95);
+  font-size: 18px;
+  border-radius: 20px;
+  height: 20rem;
+  width: 50rem;
+  background-color: #f6f6f6;
+}
+
+.pay-head {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-family: "Varela Round", sans-serif;
+  font-size: 15px;
+}
+
+.pay-data {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.pay-title {
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.card-info {
+  flex: 5;
+  display: flex;
+  flex-direction: row;
+}
+
+.col1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tit {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  color: #000;
+  font-size: 0.9rem;
+}
+
+.col-data1 {
+  flex: 5;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.9rem;
+}
+
+.amount2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(0, 0, 0);
+}
+
+.heading {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(27, 27, 27);
+}
+
+.p1 {
+  margin-right: 10px;
+}
+
+.col2 {
+  flex: 1;
+  display: flex;
+}
+
+/* .amount2,
+.earnings > p {
+  margin-bottom: 10px;
+} */
+.pay-inf {
+  display: flex;
+  justify-content: space-between;
+}
+
+.d {
+  color: #000;
+}
+
+.earnings {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 4rem;
+  margin-left: 4rem;
+}
+
+.deduct,
+.gross {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.gross-amount {
+  color: #61beb0;
+}
+
+.deduct-amount {
+  color: #f85d43;
+}
+
+.net-pay {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.y {
+  flex: 5;
+}
+
+.x {
+  flex: 5;
+  margin-left: 12rem;
+  margin-right: 4rem;
+}
+
+.net-amount {
+  color: #bf3a3a;
+}

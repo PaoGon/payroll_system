@@ -10,6 +10,7 @@
   background-color: #4977ad;
   display: flex;
   align-items: center;
+  padding: 10px;
 }
 
 .logs {
@@ -19,14 +20,17 @@
   margin-left: 3rem;
 }
 
-.clk {
+.clk > a {
+  display: flex;
   cursor: pointer;
   font-family: "Varela Round", sans-serif;
   color: #ffffff;
-}
-
-#clk-act {
-  font-size: 1rem;
+  width: 10rem;
+  margin-right: 1rem;
+  margin-left: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .cont {
@@ -62,19 +66,17 @@
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
+  text-decoration: none;
 }
 .nav-icon {
   font-size: 35px;
 }
 .nav-title {
   font-size: 20px;
+  text-decoration: none;
+  color: #ffffff;
 }
-
-/* .ic:hover {
-  transition: all 0.3 ease-out;
-  color: #b2b2b2;
-} */
-
+.nav-title:hover,
 .ic:hover > div {
   transition: all 0.3 ease-out;
   color: #b2b2b2;
@@ -110,8 +112,8 @@
   border-radius: 15px;
   border: none;
   padding-left: 10px;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 80%;
   outline: none;
   font-size: 1rem;
   font-weight: bold;
@@ -130,13 +132,11 @@
 
 .search-box {
   display: flex;
-  align-items: stretch;
-  justify-content: center;
-  padding: 4px;
+  align-items: center;
+  justify-content: flex-end;
   border-radius: 20px;
   height: 100%;
   width: 50%;
-  /* background-color: #b2b2b2; */
 }
 
 .menu-bars {

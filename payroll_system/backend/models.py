@@ -1,4 +1,10 @@
+from django.utils import timezone
+from datetime import datetime
 from django.db import models
+from django.contrib.auth.models import User
+# from django.utils import timezone
+from datetime import datetime
+
 import random
 import string
 
@@ -22,8 +28,8 @@ def calc_phil_health(fixed_rate):
     }
 
     if fixed_rate <= 10000.00:
-        shares['ee'] = fixed_rate/2
-        shares['er'] = fixed_rate/2
+        shares['ee'] = 350 / 2
+        shares['er'] = 350 / 2
 
         return shares
 
@@ -72,43 +78,59 @@ def calc_sss_share(fixed_rate):
 
 
 def comp_payslip(fixed_rate, loan, cont, allowance, holiday_pay):
-    gross_salary = fixed_rate
+    gross_salary = fixed_rate + allowance + holiday_pay
     total_cont = cont['sss'] + cont['pg'] + cont['ph']
 
-    tax = gross_salary - total_cont
+    tax = fixed_rate - total_cont
 
-    total_loan = loan['sss_loan'] + loan['mp2'] + loan['hdmf'] + loan['cash']
+    total_bonus = holiday_pay + allowance
 
-    total_deduction = tax - total_loan
+    total_deduction = loan['sss_loan'] + \
+        loan['mp2'] + loan['hdmf'] + loan['cash']
 
-    net_pay = (gross_salary - total_deduction) + allowance + holiday_pay
+    net_pay = (tax - total_deduction) + total_bonus
 
     pay = {
         'gross_salary': gross_salary,
         'deduction': total_deduction,
         'net_pay': net_pay,
-        'bonus': holiday_pay
+        'bonus': total_bonus
     }
 
     return pay
 
 
 class Employee(models.Model):
+    user = models.OneToOneField(
+        User, null=True, blank=True, on_delete=models.CASCADE)
+
     employee_id = models.CharField(
         "ID", unique=True, max_length=8, default=gen_emp_id)
-    name = models.CharField("Name", max_length=50)
-    surname = models.CharField("Surname", max_length=20)
-    middlename = models.CharField("Midlename", max_length=20)
-    status = models.CharField("Status", max_length=10)
-    position = models.CharField("Position", max_length=50)
-    employement_type = models.CharField("Employement type", max_length=50)
-    fixed_rate = models.IntegerField()
-    sss_id = models.CharField("sss_id", max_length=30)
-    tin_num = models.CharField("tin_num", max_length=30)
-    phil_id = models.CharField("phil_id", max_length=30)
-    pagibig_id = models.CharField("pagibig_id", max_length=30)
+
+    name = models.CharField("Name", max_length=50, default='*')
+
+    surname = models.CharField(
+        "Surname", max_length=20, default='*')
+
+    middlename = models.CharField("Midlename", max_length=20, default='*')
+    status = models.CharField("Status", max_length=10, default='*')
+    position = models.CharField("Position", max_length=50, default='*')
+    employement_type = models.CharField(
+        "Employement type", max_length=50, default='*')
+    fixed_rate = models.IntegerField(default=0)
+    sss_id = models.CharField("sss_id", max_length=30, default='*')
+    tin_num = models.CharField("tin_num", max_length=30, default='*')
+    phil_id = models.CharField("phil_id", max_length=30, default='*')
+    pagibig_id = models.CharField("pagibig_id", max_length=30, default='*')
     # payroll = models.ForeignKey(
     #     Payroll,  null=True, blank=True, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+
+        self.name = self.user.first_name
+        self.surname = self.user.last_name
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)
@@ -125,7 +147,7 @@ class Payroll(models.Model):
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
     sss_loan = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     mp2 = models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    hdmf_loan = models.DecimalField(max_digits=7, decimal_places=2, default=2)
+    hdmf_loan = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 
     sss_er_share = models.DecimalField(
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
@@ -139,6 +161,7 @@ class Payroll(models.Model):
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
     philhealth_ee_share = models.DecimalField(
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def save(self, *args, **kwargs):
         fixed_rate = self.employee.fixed_rate
@@ -163,15 +186,22 @@ class Payroll(models.Model):
 
 class Attendace(models.Model):
     employee = models.ForeignKey(
-        Employee, null=True, blank=True, on_delete=models.CASCADE)
-    time_in = models.DateField(auto_now_add=True)
-    late = models.DateField(auto_now_add=True)
-    time_out = models.DateField(auto_now_add=True)
-    on_leave = models.BooleanField(default=False)
+        Employee, related_name='attendance', null=True, blank=True, on_delete=models.CASCADE)
+    time_in = models.DateTimeField(default=datetime.now, blank=True)
+    late = models.BooleanField(default=False)
+    time_out = models.DateTimeField(default=datetime.now, blank=True)
     absent = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+
+        # print(self.time)
+        day = self.time_in.strftime("%d")
+        print('day: ', day)
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.employee.employee_id
+        return str(self.id)
 
 
 class Payslip(models.Model):
@@ -183,6 +213,7 @@ class Payslip(models.Model):
         max_digits=7, decimal_places=2, default=0)
     deduction = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     net_pay = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def save(self, *args, **kwargs):
         fixed_rate = self.payroll.employee.fixed_rate
@@ -194,6 +225,7 @@ class Payslip(models.Model):
             'hdmf': self.payroll.hdmf_loan,
             'cash': self.payroll.cash_advance,
         }
+        print(loan)
 
         cont = {
             'sss': self.payroll.sss_ee_share,
@@ -201,12 +233,15 @@ class Payslip(models.Model):
             'ph': self.payroll.philhealth_ee_share,
         }
 
+        print(cont)
         data = comp_payslip(fixed_rate, loan, cont, allowance, holiday_pay)
 
         self.gross_salary = data['gross_salary']
         self.total_bonus = data['bonus']
         self.deduction = data['deduction']
         self.net_pay = data['net_pay']
+
+        print(data)
 
         super().save(*args, **kwargs)
 

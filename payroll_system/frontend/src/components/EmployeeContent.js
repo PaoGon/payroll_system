@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import {FaRegUserCircle} from 'react-icons/fa'
 import {AiFillDelete} from 'react-icons/ai'
 import {AiFillEdit} from 'react-icons/ai'
@@ -35,20 +36,31 @@ export default function EmployeeContent(props) {
 
 
     // ?sends get reqeust to the API
-    function getReq(){
-        fetch("/api/employee-list")
-        .then((response)=>response.json())
-        .then((data) => setState(data))
-        .then(()=> setRender(true))
-        .then(() => props.setTrigger(false))
-        .catch(err => console.log(err));
+    const getReq = async () => {
+        const res = await fetch("/api/employee-list")
+        const data = await res.json()
+        
+        try{
+            setState(data)
+            setRender(true)
+        } catch(err){
+            console.log(err)
+        }
     }
+    
+    useEffect(() => {
+        getReq()
+        props.setTrigger(false)
+    },[props.trigger])
 
     // ?hundles delete
     function deleteEmp(id){
         const requestOptions = {
             method: "DELETE",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             cache: "no-cache"
         };
         fetch(`/api/delete-employee?id=${id}`, requestOptions)
@@ -60,7 +72,10 @@ export default function EmployeeContent(props) {
     function updateEmp(){
         const requestOptions = {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             body: JSON.stringify(data),
             cache: "no-cache"
         };
@@ -72,15 +87,14 @@ export default function EmployeeContent(props) {
 
     }
 
-    // ?activate the GET method when the page loaded
-    window.onload = () => getReq();
     
 
     return(
         <div className="con">
 
             {/* ?activates the GET method */}
-            {props.trigger ? getReq() : ''}
+            {/* {props.trigger ? getReq() : ''}
+            {console.log(data)} */}
             
             <div class="div-table">
                 <div class="div-table-row">

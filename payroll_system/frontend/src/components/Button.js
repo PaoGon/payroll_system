@@ -4,13 +4,14 @@ const STYLES = ['btn--primary', 'btn--outline'];
 
 const COLOR = ['primary', 'blue', 'orange', 'red', 'green', 'gray'];
 
-const SIZE = ['btn--medium', 'btn--large', 'btn-mobile']
+const SIZE = ['btn--medium', 'btn--large', 'btn-mobile', 'btn--wide']
 
 export const  Button = ({
     children,
     icon,
     type,  
     onClick,
+    disable,
     buttonStyle,
     buttonColor,
     buttonSize
@@ -21,7 +22,7 @@ export const  Button = ({
 
     const btn_size = SIZE.includes(buttonSize) ? buttonSize : SIZE[0];
     return (
-        <button className = {`btn ${btn_style} ${btn_color} ${btn_size}`} onClick={onClick} type={type}>
+        <button className = {`btn ${btn_style} ${btn_color} ${btn_size}`} onClick={onClick} type={type} disabled={disable}>
             <div className="lab">
                 {icon}
                 {children}

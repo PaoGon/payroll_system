@@ -1,5 +1,6 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render
-from rest_framework import generics, status, viewsets
+from rest_framework import generics, serializers, status, viewsets
 from .serializers import (
     EmployeeSerializer,
     CreateEmployeeSerializer,
@@ -8,11 +9,15 @@ from .serializers import (
     PayrollPageSerializer,
     PayrollSerializer,
     CreatePayslipSerializer,
-    PayrollDetailSerializer
+    PayrollDetailSerializer,
+    AttendanceSerializer,
+    UpdateAttendanceSerializer,
+    AttendanceListSerializer
 )
 
-from .models import Employee, Payroll, Payslip
+from .models import Attendace, Employee, Payroll, Payslip
 from .pagination import PageNumberPagination
+from django.contrib.auth.models import User
 
 
 from rest_framework.views import APIView
@@ -21,9 +26,35 @@ from rest_framework import filters
 
 
 # Create your views here.
+# * get User profile
+class GetUserProfileView(APIView):
+    def get(self, request, format=None):
+        user = self.request.user
+        username = user.username
+
+        user = User.objects.get(id=user.id)
+
+        user_profile = Employee.objects.get(user=user)
+        user_profile = PayrollSerializer(user_profile)
+
+        if user.is_staff:
+
+            return Response({
+                'profile': user_profile.data,
+                'username': str(username),
+                'status': 'admin'
+            })
+
+        else:
+
+            return Response({
+                'profile': user_profile.data,
+                'username': str(username),
+                'status': 'user'
+            })
 
 
-# Employee page api views
+# * Employee page api views
 class EmployeeView(generics.ListAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -94,12 +125,47 @@ class PayrollPageview(generics.ListAPIView):
 
 
 class SampleView(generics.ListAPIView):
-    queryset = Employee.objects.all()
+    queryset = Employee.objects.get_queryset().order_by('id')
     serializer_class = PayrollSerializer
 
-# Payroll page api views
+
+class AttendanceView(APIView):
+    queryset = Attendace.objects.all()
+    serializer_class = AttendanceSerializer
+
+    def post(self, request, format=None):
+
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                'success': 'Attendance Recorded Successfully',
+                'id': serializer.data['id']
+            }, status=status.HTTP_200_OK)
+
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class CreatePayroll(APIView):
+class UpdateAttendanceView(APIView):
 
-#     def post(self, request, format=None):
+    serializer_class = UpdateAttendanceSerializer
+    lookup_url_kwarg = 'id'
+
+    def put(self, request, format=None):
+        print('this is the rquest: ', request)
+
+        id = request.GET.get(self.lookup_url_kwarg)
+        snippet = Attendace.objects.get(id=id)
+        serializer = self.serializer_class(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print(serializer.data)
+            return Response({'success': 'Time out successfully submitted', 'data': serializer.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Invalid Request: Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AttendanceListView(generics.ListAPIView):
+    queryset = Attendace.objects.all()
+    serializer_class = AttendanceListSerializer
