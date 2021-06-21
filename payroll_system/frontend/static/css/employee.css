@@ -1,3 +1,4 @@
+.payslip-cont,
 .employee {
   height: 100%;
   display: flex;
@@ -5,6 +6,7 @@
   margin-top: 5px;
 }
 
+.payslip-cont,
 .employee > div {
   margin-bottom: 5px;
   margin-left: 3rem;
@@ -26,7 +28,7 @@
   display: flex;
   align-items: center;
   font-family: "Varela Round", sans-serif;
-  font-size: 15px;
+  font-size: 1rem;
 }
 
 .lab {
@@ -38,8 +40,12 @@
   font-size: 25px;
 }
 
+.testing,
 .div-table {
-  display: table;
+  /* display: table; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   color: #9c9c9c;
   font-size: 1rem;
@@ -99,6 +105,10 @@
 }
 
 .con {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
   width: 100%;
   height: 100%;
 }

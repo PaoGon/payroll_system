@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 import { login } from '../actions/auth'
 import CSRFToken from './CSRFToken'
 
-function Login({login, isAuthenticated}) {
+function Login({login, isAuthenticated, isAdmin, status}) {
+    
     const [data, setData] = useState({
         
         username: "",
@@ -26,17 +27,24 @@ function Login({login, isAuthenticated}) {
 
     const onSubmit = e =>{
         e.preventDefault();
-        console.log(data)
-
         login(data)
     };
-
+    
     if (isAuthenticated){
-        return <Redirect to="/dashboard" />
+        
+        if(isAdmin == 'admin' || status == 'admin'){
+            return <Redirect to="/dashboard" />
+            
+        }
+        else if(isAdmin == 'user' || status == 'user'){
+            console.log('hotdog')
+            return <Redirect to="/attendance" />
+        }
+        
+
     }
 
     
-
     return (
         <>
             <form className='login' onSubmit={e => onSubmit(e)}>
@@ -49,7 +57,7 @@ function Login({login, isAuthenticated}) {
                             return(
                                 <div className="log-fields" key={key}>
                                     
-                                    <input type={val.type} name={val.name} placeholder={val.place_holder} size={val.size} onChange={getData} required/>
+                                    <input type={val.type} name={val.name} placeholder={val.place_holder} size={val.size} onChange={getData} required autoFocus={val.auto}/>
                                     
                                 </div>
                             );
@@ -71,7 +79,9 @@ function Login({login, isAuthenticated}) {
     )
 }
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isAdmin: state.auth.status,
+    status: state.profile.status
 })
 
 export default connect(mapStateToProps, {login})(Login)

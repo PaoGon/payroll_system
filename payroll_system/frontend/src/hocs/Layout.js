@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import Sidebar from '../components/Sidebar'
+import React, { useEffect, } from 'react'
+import Navbar from '../components/Navbar'
 import { connect } from 'react-redux'
 import { checkAuthenticated } from '../actions/auth'
-import Login from '../components/Login'
+import { load_user } from '../actions/profile'
 
-
-function Layout({ children, checkAuthenticated, isAuthenticated}) {
-    const [log, setLog] = useState(false)
+function Layout({ children, checkAuthenticated, path, load_user}) {
     useEffect(() => {
         checkAuthenticated()
+        load_user()
     }, [])
-    
-    if(isAuthenticated){
-       setLog(true)
-    }
 
+    
     return (
         <div className='container'>
-            <Sidebar/>
-            {log? 
-                {children}
-            :
-                <Login/>
-            }
-            
+            <Navbar path={path}/>
+            {children}
         </div>
     )
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
-})
 
 
-export default connect(mapStateToProps, { checkAuthenticated })(Layout)
+export default connect(null, { checkAuthenticated, load_user })(Layout)

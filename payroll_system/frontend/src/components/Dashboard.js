@@ -1,5 +1,4 @@
 import React from 'react'
-import Sidebar from './Sidebar'
 import DoughnutCharts from './DoughnutCharts'
 import LineChart from './LineChart'
 import {CardsData} from './CardsData'

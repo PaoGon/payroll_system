@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import {Button} from './Button'
 import {RiAddCircleFill} from 'react-icons/ri'
-import {PopupData} from './PopupData'
 
-import Popup from './Popup'
 import EmployeeContent from './EmployeeContent'
 import Register from './Register'
 

@@ -8,8 +8,8 @@ import {
 } from '../actions/types'
 
 const initialState = {
-    isAuthenticate: null,
-    username: ''
+    isAuthenticated: null,
+    status: ''
 }
 
 
@@ -27,13 +27,13 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 isAuthenticated: true,
-                username: payload
+                status: payload
             }
         case LOGOUT_SUCCESS:
             return {
                 ...state,
                 isAuthenticated: false,
-                username: ''
+                status: ''
             }
         case LOGIN_FAIL:
         case LOGOUT_FAIL:

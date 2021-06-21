@@ -1,4 +1,5 @@
 from django.contrib import auth
+from django.contrib.auth import models
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect, render
@@ -19,8 +20,10 @@ from django.utils.decorators import method_decorator
 
 class CheckAuthenticatedView(APIView):
     def get(self, request, format=None):
+        user = self.request.user
+
         try:
-            isAuthenticated = User.is_authenticated
+            isAuthenticated = user.is_authenticated
 
             if isAuthenticated:
                 return Response({'isAuthenticated': 'success'})
@@ -62,8 +65,21 @@ class LoginView(APIView):
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
-            auth.login(request, user)
-            return Response({'success': 'User Authenticated', 'username': username})
+            if user.is_staff:
+                auth.login(request, user)
+                return Response({
+                    'success': 'User Authenticated',
+                    'username': username,
+                    'status': 'admin'
+                })
+            else:
+                auth.login(request, user)
+                return Response({
+                    'success': 'User Authenticated',
+                    'username': username,
+                    'status': 'user'
+
+                })
 
         else:
             return Response({'error': 'Error Authenticating'})

@@ -1,5 +1,9 @@
+from django.utils import timezone
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
+# from django.utils import timezone
+from datetime import datetime
 
 import random
 import string
@@ -74,22 +78,23 @@ def calc_sss_share(fixed_rate):
 
 
 def comp_payslip(fixed_rate, loan, cont, allowance, holiday_pay):
-    gross_salary = fixed_rate
+    gross_salary = fixed_rate + allowance + holiday_pay
     total_cont = cont['sss'] + cont['pg'] + cont['ph']
 
-    tax = gross_salary - total_cont
+    tax = fixed_rate - total_cont
 
-    total_loan = loan['sss_loan'] + loan['mp2'] + loan['hdmf'] + loan['cash']
+    total_bonus = holiday_pay + allowance
 
-    total_deduction = tax - total_loan
+    total_deduction = loan['sss_loan'] + \
+        loan['mp2'] + loan['hdmf'] + loan['cash']
 
-    net_pay = total_deduction + allowance + holiday_pay
+    net_pay = (tax - total_deduction) + total_bonus
 
     pay = {
         'gross_salary': gross_salary,
         'deduction': total_deduction,
         'net_pay': net_pay,
-        'bonus': holiday_pay
+        'bonus': total_bonus
     }
 
     return pay
@@ -156,6 +161,7 @@ class Payroll(models.Model):
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
     philhealth_ee_share = models.DecimalField(
         null=True, blank=True, max_digits=7, decimal_places=2, default=0)
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def save(self, *args, **kwargs):
         fixed_rate = self.employee.fixed_rate
@@ -180,15 +186,22 @@ class Payroll(models.Model):
 
 class Attendace(models.Model):
     employee = models.ForeignKey(
-        Employee, null=True, blank=True, on_delete=models.CASCADE)
-    time_in = models.DateField(auto_now_add=True)
-    late = models.DateField(auto_now_add=True)
-    time_out = models.DateField(auto_now_add=True)
-    on_leave = models.BooleanField(default=False)
+        Employee, related_name='attendance', null=True, blank=True, on_delete=models.CASCADE)
+    time_in = models.DateTimeField(default=datetime.now, blank=True)
+    late = models.BooleanField(default=False)
+    time_out = models.DateTimeField(default=datetime.now, blank=True)
     absent = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+
+        # print(self.time)
+        day = self.time_in.strftime("%d")
+        print('day: ', day)
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.employee.employee_id
+        return str(self.id)
 
 
 class Payslip(models.Model):
@@ -200,6 +213,7 @@ class Payslip(models.Model):
         max_digits=7, decimal_places=2, default=0)
     deduction = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     net_pay = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def save(self, *args, **kwargs):
         fixed_rate = self.payroll.employee.fixed_rate

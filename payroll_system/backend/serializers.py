@@ -1,5 +1,13 @@
+from django.db.models import fields
 from rest_framework import serializers
-from .models import Employee, Payroll, Payslip
+from .models import Attendace, Employee, Payroll, Payslip
+
+
+# *user profile serializer
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = '__all__'
 
 
 # *payroll model serializer
@@ -54,7 +62,8 @@ class PayslipSerializer(serializers.ModelSerializer):
             'gross_salary',
             'total_bonus',
             'deduction',
-            'net_pay'
+            'net_pay',
+            'date_created',
         )
 
 
@@ -74,13 +83,11 @@ class PayrollDetailSerializer(serializers.ModelSerializer):
             'sss_loan',
             'mp2',
             'hdmf_loan',
-            'sss_er_share',
             'sss_ee_share',
-            'philhealth_er_share',
             'philhealth_ee_share',
-            'pagibig_er_share',
             'pagibig_ee_share',
             'payslip',
+            'date_created',
         )
 
 
@@ -151,3 +158,33 @@ class PayrollPageSerializer(serializers.ModelSerializer):
             'middlename',
             'position'
         )
+
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendace
+        fields = (
+            'id',
+            'employee',
+            'late',
+            'absent'
+        )
+
+
+class UpdateAttendanceSerializer(serializers.ModelSerializer):
+    # late = serializers.BooleanField(required=False)
+    # absent = serializers.BooleanField(required=False)
+    # time_in = serializers.DateTimeField(required=False)
+
+    class Meta:
+        model = Attendace
+        fields = (
+            'id',
+            'time_out'
+        )
+
+
+class AttendanceListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendace
+        fields = '__all__'

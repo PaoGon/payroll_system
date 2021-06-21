@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import Cookies from 'js-cookie'
 import {Button} from './Button'
 import {BiSend} from 'react-icons/bi'
 import {FaLessThanEqual, FaRegUserCircle} from 'react-icons/fa'
@@ -60,7 +61,10 @@ function Payroll() {
 
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             body: JSON.stringify(cont),
             cache: "no-cache"
         };
@@ -79,7 +83,10 @@ function Payroll() {
         })  
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             body: JSON.stringify(obj),
             cache: "no-cache"
         };

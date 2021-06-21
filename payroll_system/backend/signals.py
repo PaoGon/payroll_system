@@ -7,6 +7,7 @@ from .models import Employee
 @receiver(post_save, sender=User)
 def create_emp(sender, instance, created, **kwargs):
     if created:
+        print('create')
         Employee.objects.create(user=instance)
 
 

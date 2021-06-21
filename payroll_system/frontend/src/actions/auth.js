@@ -1,45 +1,46 @@
 import Cookies from 'js-cookie'
+import { load_user } from './profile'
 import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    AUTHENTICATED_FAIL,
     AUTHENTICATED_SUCCESS,
-    AUTHENTICATED_FAIL
 }from './types'
 
 export const checkAuthenticated = () => async dispatch => {
+    
+    try{
 
-    try {
-        const res = await fetch('/api/authenticated')
+        const res = await fetch("/api/authenticated")
         const data = await res.json()
-
+        
+        
         if(data.error || data.isAuthenticated === 'error'){
             dispatch({
                 type: AUTHENTICATED_FAIL,
                 payload: false
             })
-        }
-        else if(data.isAuthenticated === 'success'){
+        } else if (data.isAuthenticated === 'success'){
             dispatch({
                 type: AUTHENTICATED_SUCCESS,
                 payload: true
             })
-
-        }
-        else{
+        } else{
             dispatch({
-                tpye: AUTHENTICATED_FAIL,
+                type: AUTHENTICATED_FAIL,
                 payload: false
             })
         }
         
 
+
     } catch(err){
         dispatch({
-            tpye: AUTHENTICATED_FAIL,
-            payload: false
-        })
+                type: AUTHENTICATED_FAIL,
+                payload: false
+            })
 
     }
 
@@ -63,8 +64,9 @@ export const login = (contt) => async  dispatch =>{
         if (data.success){
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: data.username
+                payload: data.status
             })
+            dispatch(load_user())
         } else{
             dispatch({
                 type: LOGIN_FAIL

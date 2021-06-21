@@ -20,17 +20,17 @@
   margin-left: 3rem;
 }
 
-.clk {
+.clk > a {
+  display: flex;
   cursor: pointer;
   font-family: "Varela Round", sans-serif;
   color: #ffffff;
-  width: fit-content;
+  width: 10rem;
   margin-right: 1rem;
   margin-left: 2rem;
-}
-
-#clk-act {
-  font-size: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .cont {
@@ -66,6 +66,7 @@
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
+  text-decoration: none;
 }
 .nav-icon {
   font-size: 35px;
@@ -75,12 +76,7 @@
   text-decoration: none;
   color: #ffffff;
 }
-
-/* .ic:hover {
-  transition: all 0.3 ease-out;
-  color: #b2b2b2;
-} */
-
+.nav-title:hover,
 .ic:hover > div {
   transition: all 0.3 ease-out;
   color: #b2b2b2;
