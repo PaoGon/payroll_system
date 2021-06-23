@@ -7,13 +7,6 @@ system analysis and design from Technological University of the Philippines Mani
 
 ---
 
-## Contributors
-
-- Paolo Gonzales <pickelse25@gmial.com>
-- Joshua Zion Olaño <jlozion@gmail.com>
-
----
-
 ## Copyright
 
 © Gonzales Paolo, Technological Univeristy of the Philippines Manila
@@ -25,6 +18,12 @@ system analysis and design from Technological University of the Philippines Mani
 This project is used by the following company:
 
 - Vertex One
+
+---
+## Contributors
+
+- Paolo Gonzales <pickelse25@gmial.com>
+- Joshua Zion Olaño <jlozion@gmail.com>
 
 ---
 
