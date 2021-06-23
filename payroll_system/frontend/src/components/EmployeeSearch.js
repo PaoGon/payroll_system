@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Cookies from 'js-cookie'
 import {Button} from './Button.js'
 import {FaRegUserCircle} from 'react-icons/fa'
 import {AiFillEdit} from 'react-icons/ai'
@@ -59,7 +60,10 @@ export default function EmployeeSearch(props) {
     function deleteEmp(id){
         const requestOptions = {
             method: "DELETE",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             cache: "no-cache"
         };
         fetch(`/api/delete-employee?id=${id}`, requestOptions)
@@ -70,7 +74,10 @@ export default function EmployeeSearch(props) {
     function updateEmp(){
         const requestOptions = {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": Cookies.get('csrftoken')
+            },
             body: JSON.stringify(data),
             cache: "no-cache"
         };

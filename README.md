@@ -1,0 +1,33 @@
+# Vertex One Payroll System
+
+**version 1.0.0**
+
+A web-based payroll system build for the company Vertex one and for the completion of the course subject
+system analysis and design from Technological University of the Philippines Manila.
+
+---
+
+## Contributors
+
+- Paolo Gonzales <pickelse25@gmial.com>
+- Joshua Zion Olaño <jlozion@gmail.com>
+
+---
+
+## Copyright
+
+© Gonzales Paolo, Technological Univeristy of the Philippines Manila
+
+---
+
+## Used By
+
+This project is used by the following company:
+
+- Vertex One
+
+---
+
+## Authors
+
+- [@PaoGon](https://github.com/PaoGon)
