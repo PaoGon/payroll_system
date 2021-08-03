@@ -17,7 +17,7 @@ system analysis and design from Technological University of the Philippines Mani
 
 This project is used by the following company:
 
-- Vertex One
+- Sunrise
 
 ---
 ## Contributors
