@@ -5,6 +5,10 @@ import {FaRegUserCircle} from 'react-icons/fa'
 import {AiFillEdit} from 'react-icons/ai'
 import {AiFillDelete} from 'react-icons/ai'
 import {FaTimes} from 'react-icons/fa'
+import { PositionRate } from './PositionRate'
+import { Statutory } from './Statutory'
+import { StatusData } from './StatusData'
+import { TypeData } from './TypeData'
 import {PopupData} from './PopupData'
 
 import Popup from './Popup'
@@ -16,6 +20,7 @@ export default function EmployeeSearch(props) {
     const [activate, setActivate] = useState(false)
 
 
+
     
     // triggers edit action
     const[edit, setEdit] = useState(false);
@@ -24,19 +29,27 @@ export default function EmployeeSearch(props) {
     const[id, setId] = useState();
 
     // stores the data of the edit
-    const [data, setData] = useState({
-        name: "",
-        surname: "",
-        middlename: "",
-        status: "",
-        position: "",
-        employement_type: "",
-        fixed_rate: "",
-        sss_id: "",
-        tin_num: "",
-        phil_id: "",
-        pagibig_id: ""
-    });
+    const [data, setData] = useState({});
+
+    function status_data(cont,key){
+        return (cont['status'] = key)
+    }
+
+    function type_data(cont,key){
+        return (cont['employement_type'] = key)
+    }
+
+    function tryData(test,res){
+        status_data(test,res)
+        console.log(data)
+    }
+
+
+    function sampleData(test,res){
+        type_data(test,res)
+        console.log(data)
+    }
+
 
     // gets the data of the edit fields
     function getData(val){
@@ -102,8 +115,8 @@ export default function EmployeeSearch(props) {
                     <div class="div-table-row">
                         <div className="div-table-col lab"></div>
                         <div class="div-table-col lab">Employee Name</div>
-                        <div  class="div-table-col lab">Designation</div>
-                        <div  class="div-table-col lab">Status</div>
+                        <div class="div-table-col lab">Designation</div>
+                        <div class="div-table-col lab">Status</div>
                         <div className="div-table-col lab">Employement Type</div>
                         <div className="div-table-col lab">Employee ID</div>
                         <div className="div-table-col lab">SSS</div>
@@ -151,18 +164,103 @@ export default function EmployeeSearch(props) {
             </div>
             </div>
 
-            <Popup trigger={edit} setTrigger={setEdit} click={updateEmp}>
+            <Popup trigger={edit} setTrigger={setEdit} click={updateEmp} title={'Edit Employee'}>
                 <div className="inputt">
+                    <div className="fullname">
+                        <div className="fname">
+                            <p>Fullname:</p>
+                        </div>
+                    <div className="make-row">  
                     {PopupData.map((val, key) =>{
-                        return(
-                            <div className='contt'>
-                                <label key={key}>
-                                    <p>{val.label}</p> 
-                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData}></input>
-                                </label>
-                            </div>         
+                                return(
+                                    <div className='contt'>
+                                        <label key={key}>
+                                            <p>{val.label}</p> 
+                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                        </label>
+                                    </div>          
+                                );
+                            })}
+                    </div>      
+                    </div>
+
+                <div className="status">
+                    <div className="stat">
+                        <p>Civil Status:</p>
+                    </div>
+                    <div className="make-row">  
+                            {StatusData.map((val, key) =>{
+                            return(                               
+                                    <div key={key}>
+                                        <Button  buttonColor='gray' onClick= {() => tryData(data, val.child)}> 
+                                            <p>{val.child}</p>
+                                        </Button>
+                                    </div>
+                            );
+                        })}
+                    </div>  
+                </div> 
+
+                <div className="type">
+                        <div className="typ">
+                            <p>Employment Type:</p>
+                        </div>
+                        <div className="make-row">
+                        {TypeData.map((val, key) =>{
+                        return(                               
+                                <div key={key}>
+                                    <Button buttonColor='gray' onClick= {() => sampleData(data, val.child)}> 
+                                    <p>{val.child}</p>
+                                    </Button>
+                                </div>                               
                         );
                     })}
+                    </div>
+                </div>  
+
+                <div className="position-rate">
+                            <div className="pos-rate">
+                                <p className="position"> Employee Position: </p>
+                                <p className="rate"> Fix Rate: </p>
+                            </div>
+
+                            <div className="column">
+                            {PositionRate.map((val, key) =>{
+                                return(
+                                    <div className='long-contt'>
+                                        <label className="long" key={key}>
+                                            <p>{val.label}</p> 
+                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                        </label>
+                                    </div>         
+                                );
+                            })}
+                            </div>
+                </div>       
+                <div className="statutory">
+                        <div className="statutory-label">
+                            <p className="TIN">TIN Number:</p>
+                            <p className="SSS">SSS Number:</p>
+                            <p className="philhealth">PhilHealth Number:</p>
+                            <p className="pag-ibig">Pag-Ibig Number:</p>
+                        </div>
+
+                        <div className="column">
+                        {Statutory.map((val, key) =>{
+                            return(
+                                <div className='long-contt'>
+                                    <label className="long" key={key}>
+                                        <p>{val.label}</p> 
+                                        <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                    </label>
+                                </div>         
+                            );
+                        })}
+                        </div>
+
+
+                </div> 
+
                 </div>
             </Popup>
 

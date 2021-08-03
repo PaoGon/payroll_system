@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Button} from './Button'
 import {RiAddCircleFill} from 'react-icons/ri'
-
+import Notification from './Notification'
 import EmployeeContent from './EmployeeContent'
 import Register from './Register'
 
