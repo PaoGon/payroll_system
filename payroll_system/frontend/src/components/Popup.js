@@ -7,7 +7,7 @@ export default function Popup(props) {
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
-                <h1>Add Employee</h1>
+                <h1>{props.title}</h1>
                 <div className="form">
                     {props.children}
                 </div>

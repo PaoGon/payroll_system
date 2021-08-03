@@ -1,37 +1,75 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import {FaRegUserCircle} from 'react-icons/fa'
-import {AiFillDelete} from 'react-icons/ai'
-import {AiFillEdit} from 'react-icons/ai'
-import {Button} from './Button'
-import {PopupData} from './PopupData'
+import { FaRegUserCircle } from 'react-icons/fa'
+import { AiFillDelete } from 'react-icons/ai'
+import { AiFillEdit } from 'react-icons/ai'
+import { Button } from './Button'
+import { PopupData } from './PopupData'
+import { StatusData } from './StatusData'
+import { TypeData } from './TypeData'
+import { PositionRate } from './PositionRate'
+import { Statutory } from './Statutory'
+import Notification from './Notification'
 
 import Popup from './Popup'
 
 export default function EmployeeContent(props) {
 
     // *stores get data form the API
-    const[state, setState] = useState();
+    const [state, setState] = useState();
     // !trigger for render
-    const[render, setRender] = useState(false);
+    const [render, setRender] = useState(false);
 
     // !triggers edit action
-    const[edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(false);
+
+    const[notify, setNotify] = useState({isOpen:false, message:'', type:''})
 
     // *stores the ID of the selected employee
-    const[id, setId] = useState();
+    const [id, setId] = useState();
 
     // *stores the data of the edit
     const [data, setData] = useState({});
 
 
+
+    const onDelete = id =>{
+        if(window.confirm('Are You sure to delete this record ?')){
+            deleteEmp(id);
+            setNotify({
+                isOpen:true,
+                message:'Deleted Succesfully',
+                type: 'error'
+            })
+        }
+    }
+
+    function status_data(cont,key){
+        return (cont['status'] = key)
+    }
+
+    function type_data(cont,key){
+        return (cont['employement_type'] = key)
+    }
+
+    function tryData(test,res){
+        status_data(test,res)
+        console.log(data)
+    }
+
+
+    function sampleData(test,res){
+        type_data(test,res)
+        console.log(data)
+    }
+
     // ?gets the data of the edit fields
-    function getData(val){
+    function getData(val) {
         setData({
             ...data,
             [val.target.name]: val.target.value
         });
-        
+
     }
 
 
@@ -39,22 +77,22 @@ export default function EmployeeContent(props) {
     const getReq = async () => {
         const res = await fetch("/api/employee-list")
         const data = await res.json()
-        
-        try{
+
+        try {
             setState(data)
             setRender(true)
-        } catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
-    
+
     useEffect(() => {
         getReq()
         props.setTrigger(false)
-    },[props.trigger])
+    }, [props.trigger])
 
     // ?hundles delete
-    function deleteEmp(id){
+    function deleteEmp(id) {
         const requestOptions = {
             method: "DELETE",
             headers: {
@@ -64,12 +102,12 @@ export default function EmployeeContent(props) {
             cache: "no-cache"
         };
         fetch(`/api/delete-employee?id=${id}`, requestOptions)
-        .then(() => getReq())
-        .catch(err => console.log(err));  
+            .then(() => getReq())
+            .catch(err => console.log(err));
     }
 
     // ?hundles delete
-    function updateEmp(){
+    function updateEmp() {
         const requestOptions = {
             method: "PUT",
             headers: {
@@ -80,28 +118,33 @@ export default function EmployeeContent(props) {
             cache: "no-cache"
         };
         fetch(`/api/update-employee?id=${id}`, requestOptions)
-        .then(() => getReq())
-        .then(() => setEdit(false))
-        .then(() => setData({}))
-        .catch(err => console.log(err));  
+            .then(() => getReq())
+            .then(() => setEdit(false))
+            .then(() => setData({}))
+            setNotify({
+                isOpen:true,
+                message:'Submitted Succesfully',
+                type: 'success'
+            })
+            .catch(err => console.log(err));
 
     }
 
-    
 
-    return(
+
+    return (
         <div className="con">
 
             {/* ?activates the GET method */}
             {/* {props.trigger ? getReq() : ''}
             {console.log(data)} */}
-            
+
             <div class="div-table">
                 <div class="div-table-row">
                     <div className="div-table-col lab"></div>
                     <div class="div-table-col lab">Employee Name</div>
-                    <div  class="div-table-col lab">Designation</div>
-                    <div  class="div-table-col lab">Status</div>
+                    <div class="div-table-col lab">Designation</div>
+                    <div class="div-table-col lab">Status</div>
                     <div className="div-table-col lab">Employement Type</div>
                     <div className="div-table-col lab">Employee ID</div>
                     <div className="div-table-col lab">SSS</div>
@@ -109,22 +152,22 @@ export default function EmployeeContent(props) {
                     <div className="div-table-col lab">pagIBIG</div>
                     <div className="div-table-col lab">PHILHEALTH</div>
                     <div className="div-table-col lab"></div>
-                    
+
                 </div>
                 {render ? state.map((val, key) => {
-                    return(
-                        <div class="div-table-row info" key = {key}>
-                            <div className="div-table-col icon"><FaRegUserCircle/></div>
+                    return (
+                        <div class="div-table-row info" key={key}>
+                            <div className="div-table-col icon"><FaRegUserCircle /></div>
                             <div className="div-table-col">
                                 <div className="name">
-                                    {val.surname} {val.name } {val.middlename} 
+                                    {val.surname} {val.name} {val.middlename}
                                 </div>
                             </div>
                             <div className="div-table-col" >
                                 <div className="name">
                                     {val.position}
                                 </div>
-                                
+
                             </div>
                             <div className="div-table-col">
                                 <div className="name">
@@ -133,8 +176,8 @@ export default function EmployeeContent(props) {
                             </div>
                             <div className="div-table-col">
                                 <div className="name">
-                                    {val.employement_type}    
-                                </div> 
+                                    {val.employement_type}
+                                </div>
                             </div>
                             <div className="div-table-col">{val.employee_id}</div>
                             <div className="div-table-col">{val.sss_id}</div>
@@ -146,34 +189,124 @@ export default function EmployeeContent(props) {
                                     setEdit(true)
                                     setId(val.id)
                                 }}>
-                                    <AiFillEdit/>
+                                    <AiFillEdit />
                                     Edit
                                 </Button>
-                                <Button buttonColor='red' onClick={() => deleteEmp(val.id)}>
-                                    <AiFillDelete/>
+                                <Button buttonColor='red' onClick={() => {
+                                    onDelete(val.id)
+                                    }}> 
+
+
+
+                                    <AiFillDelete />
                                     Delete
                                 </Button>
-                                
+
                             </div>
                         </div>
                     )
-                }): ''}
+                }) : ''}
             </div>
 
-            <Popup trigger={edit} setTrigger={setEdit} click={updateEmp}>
+            <Popup trigger={edit} setTrigger={setEdit} click={updateEmp} title={"Add Employee"}>
                 <div className="inputt">
-                    {PopupData.map((val, key) =>{
-                        return(
-                            <div className='contt'>
-                                <label key={key}>
-                                    <p>{val.label}</p> 
-                                    <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
-                                </label>
-                            </div>         
-                        );
-                    })}
+                    <div className="fullname">
+                        <div className="fname">
+                            <p>Fullname:</p>
+                        </div>
+                        <div className="make-row">
+                            {PopupData.map((val, key) => {
+                                return (
+                                    <div className='contt'>
+                                        <label key={key}>
+                                            <p>{val.label}</p>
+                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                        </label>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="status">
+                        <div className="stat">
+                            <p>Civil Status:</p>
+                        </div>
+                        <div className="make-row">
+                        {StatusData.map((val, key) =>{
+                            return(                               
+                                    <div key={key}>
+                                        <Button  buttonColor='gray' onClick= {() => tryData(data, val.child)}> 
+                                            <p>{val.child}</p>
+                                        </Button>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="type">
+                        <div className="typ">
+                            <p>Employment Type:</p>
+                        </div>
+                        <div className="make-row">
+                        {TypeData.map((val, key) =>{
+                        return(                               
+                                <div key={key}>
+                                    <Button buttonColor='gray' onClick= {() => sampleData(data, val.child)}> 
+                                    <p>{val.child}</p>
+                                    </Button>
+                                </div>
+                                 );
+                                })}
+                        </div>
+
+                    </div>
+                    <div className="position-rate"> 
+                        <div className="pos-rate">
+                            <p className="position"> Employee Position: </p>
+                            <p className="rate"> Fix Rate: </p>
+                        </div>
+                    <div className="column">
+                    {PositionRate.map((val, key) =>{
+                                return(
+                                    <div className='long-contt'>
+                                        <label className="long" key={key}>
+                                            <p>{val.label}</p> 
+                                            <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                        </label>
+                                    </div>         
+                                );
+                            })}
+                    </div>
+
+                    </div>
+                   
+                    <div className="statutory">
+                        <div className="statutory-label">
+                            <p className="TIN">TIN Number:</p>
+                            <p className="SSS">SSS Number:</p>
+                            <p className="philhealth">PhilHealth Number:</p>
+                            <p className="pag-ibig">Pag-Ibig Number:</p>
+                        </div>
+                        <div className="column">
+                        {Statutory.map((val, key) =>{
+                            return(
+                                <div className='long-contt'>
+                                    <label className="long" key={key}>
+                                        <p>{val.label}</p> 
+                                        <input type={val.type} name={val.name} placeholder={val.place_holder} onChange={getData} size={val.size}></input>
+                                    </label>
+                                </div>         
+                            );
+                        })}
+                        </div>
+                    </div>
                 </div>
             </Popup>
+
+            <Notification 
+            notify={notify}
+            setNotify={setNotify}
+            />
 
         </div>
     )
