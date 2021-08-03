@@ -1,4 +1,4 @@
-# Vertex One Payroll System
+# Sunrise Payroll System
 
 **version 1.0.0**
 
